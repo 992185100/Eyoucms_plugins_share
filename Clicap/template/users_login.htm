@@ -1,0 +1,49 @@
+{include file="header.htm" /}
+<body style="background-color: rgb(255, 255, 255); overflow: auto; cursor: default; -moz-user-select: inherit;">
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    {include file="bar.htm" /}
+    <form class="form-horizontal" id="post_form" action="{:weapp_url('Clicap/Clicap/users_login')}"  method="post">
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label for="adminlogin_is_on">是否启用</label>
+                </dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="adminlogin_is_on1" class="cb-enable {if condition='!empty($clicap.data.captcha.users_login.is_on)'}selected{/if}">启用</label>
+                        <label for="adminlogin_is_on0" class="cb-disable {if condition='empty($clicap.data.captcha.users_login.is_on)'}selected{/if}">关闭</label>
+                        <input id="adminlogin_is_on1" name="is_on" value="1" type="radio" {if condition='!empty($clicap.data.captcha.users_login.is_on)'}checked="checked"{/if}>
+                        <input id="adminlogin_is_on0" name="is_on" value="0" type="radio" {if condition='empty($clicap.data.captcha.users_login.is_on)'}checked="checked"{/if}>
+                    </div>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="verification">自定义验证文字</label>
+                </dt>
+                <dd class="opt">
+                    <textarea rows="5" cols="80" id="verification" name="config[verification]" style="width: 375px;height:250px;">{$clicap.data.captcha.users_login.config.verification|default=''}</textarea>
+                    <p class="notic">一行代表一个验证码</p>
+                    <p class="">一行一个验证码,单行中请勿出现重复文字,建议每行不超过6个汉字,例：</p>
+                    <p>阿森纳交换机</p>
+                    <p>看他还敢是否</p>
+                    <p>人间四月天他</p>
+                </dd>
+            </dl>
+            <div class="bot">
+                <input type="hidden" name="code" value="{$clicap.code|default=$weappInfo.code}">
+                <a href="JavaScript:void(0);" onclick="checkForm();" class="ncap-btn-big ncap-btn-green" id="submitBtn">确认提交</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    // 判断输入框是否为空
+    function checkForm(){
+        layer_loading('正在处理');
+        $('#post_form').submit();
+    }
+</script>
+{include file="footer.htm" /}
