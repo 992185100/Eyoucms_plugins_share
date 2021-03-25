@@ -1,0 +1,2 @@
+weapp/Clicap
+application/plugins/controller/Clicap.php

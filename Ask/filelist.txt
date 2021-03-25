@@ -1,0 +1,9 @@
+application/plugins/controller/Ask.php
+application/plugins/logic/AskLogic.php
+application/plugins/model/Ask.php
+data/schema/ey_weapp_ask.php
+data/schema/ey_weapp_ask_answer.php
+data/schema/ey_weapp_ask_answer_like.php
+data/schema/ey_weapp_ask_type.php
+template/plugins/ask
+weapp/Ask

@@ -1,0 +1,225 @@
+{include file="header.htm" /}
+<script type="text/javascript" src="__PUBLIC__/plugins/colpick/js/colpick.js"></script>
+<link href="__PUBLIC__/plugins/colpick/css/colpick.css" rel="stylesheet" type="text/css"/>
+<body style="background-color: #FFF; overflow: auto;">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    {include file="bar.htm" /}
+    <form class="form-horizontal" id="post_form" action="{:weapp_url('Contactmz/Contactmz/save')}" method="post">
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label>调用方式</label>
+                </dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="tag_weapp1" class="cb-enable {if condition='!isset($contact.data.tag_weapp) || $contact.data.tag_weapp eq 1'}selected{/if}">自动调用</label>
+                        <label for="tag_weapp0" class="cb-disable {if condition='isset($contact.data.tag_weapp) && $contact.data.tag_weapp eq 2'}selected{/if}">手工调用</label>
+                        <input id="tag_weapp1" name="tag_weapp" value="1" type="radio" {if condition="!isset($contact.data.tag_weapp) || $contact.data.tag_weapp eq 1"} checked="checked"{/if}>
+                        <input id="tag_weapp0" name="tag_weapp" value="2" type="radio" {if condition="isset($contact.data.tag_weapp) && $contact.data.tag_weapp eq 2"} checked="checked"{/if}>
+                    </div>
+                    <p class="notic">自动调用会默认绑定weapp模板标签，手工调用请参考使用指南的调用方法。</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>显示方式</label>
+                </dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="is_open1" class="cb-enable {if condition='isset($contact.data.is_open) && $contact.data.is_open eq 1'}selected{/if}">展开</label>
+                        <label for="is_open0" class="cb-disable {if condition='!isset($contact.data.is_open) || $contact.data.is_open eq 0'}selected{/if}">收缩</label>
+                        <input id="is_open1" name="is_open" value="1" type="radio" {if condition="isset($contact.data.is_open) && $contact.data.is_open eq 1"} checked="checked"{/if}>
+                        <input id="is_open0" name="is_open" value="0" type="radio" {if condition="!isset($contact.data.is_open) || $contact.data.is_open eq 0"} checked="checked"{/if}>
+                    </div>
+                    <p class="notic"></p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="kf_title">客服标题</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="kf_title" value="{$contact.data.kf_title|default='某某公司'}" id="kf_title" class="input-txt">
+                    <span class="err"></span>
+                    <p class=""></p>
+                </dd>
+            </dl>
+            
+            <dl class="row"><dt class="tit"><label><b>客服一设置</b></label></dt></dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="kf_name_1">客服名称</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="kf_name_1" placeholder="" id="kf_name_1" value="{$contact.data.kf_name_1|default='客服小王'}" class="input-txt">
+                    <span class="err"></span>
+                    <p class=""></p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="telephone_first">QQ号码</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="kf_qq_1" placeholder="" id="kf_qq_1" value="{$contact.data.kf_qq_1|default='123456789'}" class="input-txt">
+                    <span class="err"></span>
+                    <p class=""></p>
+                </dd>
+            </dl>
+            <dl class="row"><dt class="tit"><label><b>客服二设置</b></label></dt></dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="kf_name_2">客服名称</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="kf_name_2" placeholder="" id="kf_name_2" value="{$contact.data.kf_name_2|default='客服小张'}" class="input-txt">
+                    <span class="err"></span>
+                    <p class=""></p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="kf_qq_2">QQ号码</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="kf_qq_2" placeholder="" id="kf_qq_2" value="{$contact.data.kf_qq_2|default='123456789'}" class="input-txt">
+                    <span class="err"></span>
+                    <p class=""></p>
+                </dd>
+            </dl>
+            <dl class="row"><dt class="tit"><label><b>客服三设置</b></label></dt></dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="kf_name_3">客服名称</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="kf_name_3" placeholder="" id="kf_name_3" value="{$contact.data.kf_name_3|default='客服小李'}" class="input-txt">
+                    <span class="err"></span>
+                    <p class=""></p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="kf_qq_3">QQ号码</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="kf_qq_3" placeholder="" id="kf_qq_3" value="{$contact.data.kf_qq_3|default='123456789'}" class="input-txt">
+                    <span class="err"></span>
+                    <p class=""></p>
+                </dd>
+            </dl>
+            <dl class="row"><dt class="tit"><label><b>微信公众号设置</b></label></dt></dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="kf_weixin">微信公众号</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="kf_weixin" placeholder="" id="kf_weixin" value="{$contact.data.kf_weixin|default='微信公众号'}" class="input-txt">
+                    <span class="err"></span>
+                    <p class=""></p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="kf_weixinurl">微信公众号链接</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="kf_weixinurl" placeholder="" id="kf_weixinurl" {eyou:notempty name="$contact.data.kf_weixinurl"}value="{$contact.data.kf_weixinurl}"{eyou:else /}value="https://weixin.sogou.com/weixin?type=1&s_from=input&query=%E7%99%BE%E5%BA%A6&ie=utf8&_sug_=y&_sug_type_=&w=01019900&sut=4591&sst0=1573521436935&lkt=1%2C1573521436833%2C1573521436833"{/eyou:notempty} class="input-txt">
+                    <span class="err"></span>
+                    <p class=""></p>
+                </dd>
+            </dl>
+            <dl class="row"><dt class="tit"><label><b>微博设置</b></label></dt></dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="kf_weibo">微博名称</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="kf_weibo" placeholder="" id="kf_weibo" value="{$contact.data.kf_weibo|default='微博名称'}" class="input-txt">
+                    <span class="err"></span>
+                    <p class=""></p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="kf_weibourl">微博链接</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="kf_weibourl" placeholder="" id="kf_weibourl" value="{$contact.data.kf_weibourl|default='https://weibo.com/'}" class="input-txt">
+                    <span class="err"></span>
+                    <p class=""></p>
+                </dd>
+            </dl>
+            <dl class="row"><dt class="tit"><label><b>客服电话</b></label></dt></dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="kf_phone">电话号码</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="kf_phone" placeholder="" id="kf_phone" value="{$contact.data.kf_phone|default='020-00000000'}" class="input-txt">
+                    <span class="err"></span>
+                    <p class=""></p>
+                </dd>
+            </dl>
+            <style type="text/css">
+			#picker {
+				/*margin:0;*/
+				/*padding:0;*/
+				border:solid 1px #ccc;
+				width:70px;
+				height:20px;
+				border-right:40px solid green;
+				/*line-height:20px;*/
+			}
+			</style>
+            <dl class="row">
+                    <dt class="tit">
+                        <label for="uname">主题颜色</label>
+                    </dt>
+                    <dd class="opt">
+                        <input type="text" name="theme_color" value="{$contact.data.theme_color|default='#ff6565'}" id="picker" style="border-color: {$contact.data.theme_color|default='#ff6565'};" />
+                        <span class="err"></span>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+            <div class="bot">
+                <input type="hidden" name="code" value="{$contact.code|default=$weappInfo.code}">
+                <a href="JavaScript:void(0);" onclick="checkForm();" class="ncap-btn-big ncap-btn-green" id="submitBtn">确认提交</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+     	$('#picker').colpick({
+            flat:false,
+            layout:'rgbhex',
+            submit:0,
+            colorScheme:'light',
+            color:$('#picker').val(),
+            onChange:function(hsb,hex,rgb,el,bySetColor) {
+                $(el).css('border-color','#'+hex);
+                // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
+                if(!bySetColor) $(el).val('#'+hex);
+            }
+        }).keyup(function(){
+            $(this).colpickSetColor('#'+this.value);
+        });
+    });
+    // 判断输入框是否为空
+    function checkForm(){
+        layer_loading('正在处理');
+        $('#post_form').submit();
+    }
+    
+    function img_call_back(fileurl_tmp)
+    {
+        $("#wechat_logo_local").val(fileurl_tmp);
+        $("#img_a_local").attr('href', fileurl_tmp);
+        $("#img_i_local").attr('onmouseover', "layer_tips=layer.tips('<img src="+fileurl_tmp+" class=\\'layer_tips_img\\'>',this,{tips: [1, '#fff']});");
+    }
+</script>
+{include file="footer.htm" /}

@@ -1,0 +1,38 @@
+<script language="javascript" src="__WEAPP_TEMPLATE__/skin/js/contact.js"></script>
+<link rel="stylesheet" type="text/css" href="__WEAPP_TEMPLATE__/skin/css/contact.css">
+<script type="text/javascript">
+	$(function(){
+		$("#aFloatTools_Show").click(function(){
+			$('#divFloatToolsView').animate({width:'show',opacity:'show'},100,function(){$('#divFloatToolsView').show();});
+			$('#aFloatTools_Show').hide();
+			$('#aFloatTools_Hide').show();				
+		});
+		$("#aFloatTools_Hide").click(function(){
+			$('#divFloatToolsView').animate({width:'hide', opacity:'hide'},100,function(){$('#divFloatToolsView').hide();});
+			$('#aFloatTools_Show').show();
+			$('#aFloatTools_Hide').hide();	
+		});
+	});
+</script>
+<div id="floatTools" class="rides-cs" style="background:{$contact.data.theme_color|default='#ff6565'};">
+  <div class="floatL">
+  	<a style="display: {empty name="$contact.data.is_open"}block{else /}none{/empty};" id="aFloatTools_Show" class="btnOpen" title="查看在线客服" style="top:20px" href="javascript:void(0);">展开</a>
+  	<a style="display: {empty name="$contact.data.is_open"}none{else /}block{/empty};" id="aFloatTools_Hide" class="btnCtn" title="关闭在线客服" style="top:20px" href="javascript:void(0);">收缩</a>
+  </div>
+  <div id="divFloatToolsView" class="floatR" style="display: {empty name="$contact.data.is_open"}none{else /}block{/empty};">
+    <div class="cn">
+      <div class="titZx">{$contact.data.kf_title|default='某某公司'}</div>
+      <ul>
+        <li><span>{$contact.data.kf_name_1|default='客服小王'}</span> <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$contact.data.kf_qq_1|default='123456789'}&site=qq&menu=yes"><img border="0" src="__WEAPP_TEMPLATE__/skin/images/online.png" alt="点击这里给我发消息" title="点击这里给我发消息"/></a> </li>
+        <li><span>{$contact.data.kf_name_2|default='客服小张'}</span> <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$contact.data.kf_qq_2|default='123456789'}&site=qq&menu=yes"><img border="0" src="__WEAPP_TEMPLATE__/skin/images/online.png" alt="点击这里给我发消息" title="点击这里给我发消息"/></a> </li>
+        <li><span>{$contact.data.kf_name_3|default='客服小李'}</span> <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$contact.data.kf_qq_3|default='123456789'}&site=qq&menu=yes"><img border="0" src="__WEAPP_TEMPLATE__/skin/images/online.png" alt="点击这里给我发消息" title="点击这里给我发消息"/></a> </li>
+        <li>
+            <a {eyou:notempty name="$contact.data.kf_weixinurl"}href="{$contact.data.kf_weixinurl}{eyou:else /}href="https://weixin.sogou.com/weixin?type=1&s_from=input&query=%E7%99%BE%E5%BA%A6&ie=utf8&_sug_=y&_sug_type_=&w=01019900&sut=4591&sst0=1573521436935&lkt=1%2C1573521436833%2C1573521436833"{/eyou:notempty}" target="_blank">{$contact.data.kf_weixin|default='微信公众号'}</a>
+            <a href="{$contact.data.kf_weibourl|default='https://weibo.com/'}" target="_blank">{$contact.data.kf_weibo|default='微博名称'}</a>
+            <div class="div_clear"></div>
+        </li>
+        <li style="border:none;"><span>电话：{$contact.data.kf_phone|default='020-00000000'}</span> </li>
+      </ul>
+    </div>
+  </div>
+</div>
