@@ -1,0 +1,191 @@
+{include file="header.htm" /}
+<body class="bodystyle" style="overflow-y: scroll; cursor: default; -moz-user-select: inherit;">
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page" style="min-width: auto;">
+    {include file="bar.htm" /}
+    <div class="flexigrid">
+        <div class="mDiv">
+            <div class="ftitle">
+                <h3>插件配置</h3>
+            </div>
+            <div title="刷新数据" class="pReload"><i class="fa fa-refresh"></i></div>
+            <a href="{$HomeAskUrl}" target="_blank" class="btn blue">点击预览问答主页</a>
+            <div class="sDiv">
+                <div class="member-nav-group">
+                <label class="member-nav-item">
+                    <input type="button" class="btn {if condition="in_array($Request.param.sa, ['index'])"}selected{else /}current{/if}" value="栏目列表" onclick="window.location.href='{:weapp_url("Ask/Ask/index")}';">
+                </label>
+            
+                <label class="member-nav-item">
+                    <input type="button" class="btn {if condition="in_array($Request.param.sa, ['conf'])"}selected{else /}current{/if}" value="插件配置" onclick="window.location.href='{:weapp_url("Ask/Ask/conf")}';">
+                </label>
+                </div>
+            </div>
+        </div>
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit" style="padding-left: 10px;">
+                    <label>URL模式</label>
+                </dt>
+                <dd class="opt">
+                    <label>
+                        <input type="radio" name="seo_pseudo" value="1" {if condition="empty($askConfData.data.seo_pseudo) || 1 == $askConfData.data.seo_pseudo"}checked="checked"{/if}>动态URL&nbsp;
+                    </label>
+                    <label>
+                        <input type="radio" name="seo_pseudo" value="3" {if condition="3 == $askConfData.data.seo_pseudo"}checked="checked"{/if}>伪静态化&nbsp;
+                    </label>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit" style="padding-left: 10px;">
+                    <label>SEO配置</label>
+                </dt>
+                <dd class="opt">
+                    <a href="javascript:void(0);" onclick="SeoEdit(this);" data-url="{:weapp_url('Ask/Ask/seo_edit')}" data-title="主页SEO - 配置" class="ncap-btn ncap-btn-green">主页SEO</a>
+                </dd>
+            </dl>
+        </div>
+        <div class="hDiv">
+            <div class="hDivBox">
+                <table cellspacing="0" cellpadding="0" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th abbr="article_show" axis="col5" class="w10">
+                            <div class="tc"></div>
+                        </th>
+                        <th abbr="ac_id" axis="col4">
+                            <div class="">会员级别名称</div>
+                        </th>
+                        <th abbr="article_time" axis="col6" class="w100">
+                            <div class="tc">允许发布</div>
+                        </th>
+                        <th abbr="article_time" axis="col6" class="w100">
+                            <div class="tc">需要审核</div>
+                        </th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="bDiv" style="height: auto;">
+            <form id="PostForm">
+                <div id="flexigrid" cellpadding="0" cellspacing="0" border="0">
+                    <table style="width: 100%">
+                        <tbody>
+                        {empty name="list"}
+                            <tr>
+                                <td class="no-data" align="center" axis="col0" colspan="50">
+                                    <i class="fa fa-exclamation-circle"></i>没有符合条件的记录
+                                </td>
+                            </tr>
+                        {else/}
+                            {volist name="list" id="vo"}
+                            <tr>
+                                <td class="sort">
+                                    <div class="w10 tc">
+                                    </div>
+                                </td>
+                                <td style="width: 100%">
+                                    <div style="">
+                                        {$vo.level_name}
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="w100 tc">
+                                        {eq name="$vo['ask_is_release']" value='1'}
+                                            <span class="yes" onclick="changeTableVal('users_level','level_id','{$vo.level_id}','ask_is_release',this);">
+                                                <i class="fa fa-check-circle"></i>是
+                                            </span>
+                                        {else /}
+                                            <span class="no" onclick="changeTableVal('users_level','level_id','{$vo.level_id}','ask_is_release',this);">
+                                                <i class="fa fa-ban"></i>否
+                                            </span>
+                                        {/eq}
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="w100 tc">
+                                        {eq name="$vo['ask_is_review']" value='1'}
+                                            <span class="yes" onclick="changeTableVal('users_level','level_id','{$vo.level_id}','ask_is_review',this);">
+                                                <i class="fa fa-check-circle"></i>是
+                                            </span>
+                                        {else /}
+                                            <span class="no" onclick="changeTableVal('users_level','level_id','{$vo.level_id}','ask_is_review',this);">
+                                                <i class="fa fa-ban"></i>否
+                                            </span>
+                                        {/eq}
+                                    </div>
+                                </td>
+                            </tr>
+                            {/volist}
+                        {/empty}
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+            <div class="iDiv" style="display: none;"></div>
+        </div>
+        <div class="tDiv">
+            <div class="tDiv2"><div class="fbutton"></div></div>
+            <div style="clear:both"></div>
+        </div>
+        <!--分页位置-->
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        // 表格行点击选中切换
+        $('#flexigrid > table>tbody >tr').click(function(){
+            $(this).toggleClass('trSelected');
+        });
+
+        // 点击刷新数据
+        $('.fa-refresh').click(function(){
+            location.href = location.href;
+        });
+    });
+
+    $(function(){
+        $('input[name=seo_pseudo]').click(function(){
+            layer_loading('正在处理');
+            var value = $(this).val();
+            $.ajax({
+                type: "POST",
+                url: "{:weapp_url('Ask/Ask/setData')}",
+                data: {name:'seo_pseudo',value:value,_ajax:1},
+                dataType: "JSON",
+                success: function(res){
+                    layer.closeAll();
+                    if(parseInt(res.code) == 1){
+                        layer.msg(res.msg, {icon: 1, time:500}, function(){
+                            window.location.reload();
+                        });
+                    }else{
+                        layer.alert(res.msg, {icon: 5});
+                    }
+                },
+                error: function(e){
+                    layer.closeAll();
+                    layer.alert('未知错误，无法继续~', {icon: 5});
+                }
+            });
+        });
+    });
+ 
+    function SeoEdit(obj) {
+        var url = $(obj).data('url');
+        var title = $(obj).data('title');
+        //iframe窗
+        layer.open({
+            type: 2,
+            title: title,
+            fixed: true,
+            shadeClose: false,
+            shade: 0.3,
+            area: ['700px', '400px'],
+            content: url
+        });
+    }
+</script>
+{include file="footer.htm" /}

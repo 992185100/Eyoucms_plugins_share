@@ -1,0 +1,38 @@
+<?php
+/**
+ * 易优CMS
+ * ============================================================================
+ * 版权所有 2016-2028 海南赞赞网络科技有限公司，并保留所有权利。
+ * 网站地址: http://www.eyoucms.com
+ * ----------------------------------------------------------------------------
+ * 如果商业用途务必到官方购买正版授权, 以免引起不必要的法律纠纷.
+ * ============================================================================
+ * Author: 小虎哥 <1105415366@qq.com>
+ * Date: 2018-4-3
+ */
+
+// 前端URL的路由配置（支持TP5本身的路由规则）
+$rewrite = [];
+
+$askTypeModel = new \weapp\Ask\model\AskTypeModel;
+$askConfData = $askTypeModel->getWeappData();
+$ask_seo_pseudo = 1;
+if (!empty($askConfData['data']['seo_pseudo'])) {
+    $ask_seo_pseudo = intval($askConfData['data']['seo_pseudo']);
+}
+
+if (3 == $ask_seo_pseudo) {
+    $weapp_id = \think\Db::name('weapp')->where(['code'=>'Ask'])->cache(true, null, "weapp")->getField('id');
+    $rewrite = [
+        'ask/list_'.$weapp_id.'_<is_recom>_<type_id>$' =>
+            array('plugins/Ask/index',array('method' => 'get', 'ext' => 'html'), 'cache'=>1),
+        'ask/list_'.$weapp_id.'_<type_id>$' =>
+            array('plugins/Ask/index',array('method' => 'get', 'ext' => 'html'), 'cache'=>1),
+        'ask$' =>
+            array('plugins/Ask/index',array('method' => 'get', 'ext' => 'html'), 'cache'=>1),
+        'ask/view_'.$weapp_id.'_<ask_id>$' =>
+            array('plugins/Ask/details',array('method' => 'get', 'ext' => 'html'), 'cache'=>1),
+    ];
+}
+
+return $rewrite;

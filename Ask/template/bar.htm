@@ -1,0 +1,37 @@
+<div class="fixed-bar">
+    <div class="item-title"><a class="back" href="{if condition="'Ask' == $Request.param.sc && 'index' == $Request.param.sa"}{:url("Weapp/index")}{else /}{:weapp_url("Ask/Ask/index")}{/if}" title="返回列表"><i class="fa fa-angle-double-left"></i>返回</a>
+        <div class="subject">
+            <h3>{$weappInfo['name']}</h3>
+            <h5></h5>
+        </div>
+        <ul class="tab-base nc-row">
+             <li>
+            {if condition="in_array($Request.param.sa, ['index','conf'])"}
+                <a href="javascript:void(0);" class="tab current"><span>栏目列表</span></a>
+            {else/}
+                <a href="{:weapp_url("Ask/Ask/index")}" class="tab"><span>栏目列表</span></a>
+            {/if}
+            </li>
+
+            <li>
+            {eq name="$Request.param.sa" value="ask_list"}
+                <a href="javascript:void(0);" class="tab current"><span>问题列表</span></a>
+            {else /}
+                <a href="{:weapp_url("Ask/Ask/ask_list")}" class="tab"><span>问题列表</span></a>
+            {/eq}
+            </li>
+
+            <li>
+            {eq name="$Request.param.sa" value="answer"}
+                <a href="javascript:void(0);" class="tab current"><span>答案列表</span></a>
+            {else /}
+                <a href="{:weapp_url("Ask/Ask/answer")}" class="tab"><span>答案列表</span></a>
+            {/eq}
+            </li>
+
+            <li>
+                <a href="javascript:void(0);" onclick="click_to_eyou_1575506523('https://www.eyoucms.com/plus/view.php?aid=10732', '问答插件使用指南');" class="tab"><span>使用指南</span></a>
+            </li>
+        </ul>
+    </div>
+</div>

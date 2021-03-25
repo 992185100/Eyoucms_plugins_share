@@ -1,0 +1,241 @@
+{include file="header.htm" /}
+<body class="bodystyle" style="overflow-y: scroll; cursor: default; -moz-user-select: inherit;">
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page" style="min-width: auto;">
+    {include file="bar.htm" /}
+    <div class="flexigrid">
+        <div class="mDiv">
+            <div class="ftitle">
+                <h3>栏目列表</h3>
+            </div>
+            <div title="刷新数据" class="pReload"><i class="fa fa-refresh"></i></div>
+            <div class="sDiv">
+                <div class="member-nav-group">
+                <label class="member-nav-item">
+                    <input type="button" class="btn {if condition="in_array($Request.param.sa, ['index'])"}selected{else /}current{/if}" value="栏目列表" onclick="window.location.href='{:weapp_url("Ask/Ask/index")}';">
+                </label>
+
+                <label class="member-nav-item">
+                    <input type="button" class="btn {if condition="in_array($Request.param.sa, ['conf'])"}selected{else /}current{/if}" value="插件配置" onclick="window.location.href='{:weapp_url("Ask/Ask/conf")}';">
+                </label>
+                </div>
+            </div>
+        </div>
+        <div class="hDiv">
+            <div class="hDivBox">
+                <table cellspacing="0" cellpadding="0" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th abbr="article_show" axis="col5" class="w10">
+                            <div class="tc"></div>
+                        </th>
+                        <th abbr="ac_id" axis="col4">
+                            <div class="">栏目名称</div>
+                        </th>
+                        <th abbr="article_time" axis="col6" class="w150">
+                            <div class="tc">所属栏目</div>
+                        </th>
+                        <th abbr="article_time" axis="col6" class="w130">
+                            <div class="tc">操作</div>
+                        </th>
+                        <th abbr="article_time" axis="col6" class="w60">
+                            <div class="tc">排序</div>
+                        </th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="bDiv" style="height: auto;">
+            <form id="PostForm">
+                <div id="flexigrid" cellpadding="0" cellspacing="0" border="0">
+                    <table style="width: 100%">
+                        <tbody id='TbodyTemplate'>
+                        {empty name="list"}
+                            <tr>
+                                <td class="no-data" align="center" axis="col0" colspan="50">
+                                    <i class="fa fa-exclamation-circle"></i>没有符合条件的记录
+                                </td>
+                            </tr>
+                        {else/}
+                            {volist name="list" id="vo"}
+                            <tr class="tr">
+                                <td class="sort">
+                                    <div class="w10 tc">
+                                        <input type="hidden" name="type_id[]" value="{$vo.type_id}">
+                                    </div>
+                                </td>
+                                <td style="width: 100%">
+                                    <div style="">
+                                        {$vo.type_name}
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="w150 tc">
+                                        {$vo.parent_name}
+                                        <input type="hidden" name="parent_id[]" value="{$vo.parent_id}">
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="w130 tc">
+                                        <a class="btn blue" href="javascript:void(0);" data-url="{:weapp_url('Ask/Ask/ask_type_seo', ['type_id'=>$vo.type_id])}" data-title="栏目SEO - 配置" onclick="SeoEdit(this);"><i class="fa fa-trash-o"></i>SEO</a>
+                                        &nbsp;
+                                        <a href="javascript:void(0);" data-url="{:weapp_url('Ask/Ask/ask_type_del')}" onclick="FindDelData(this, '{$vo.type_id}');" class="btn red">
+                                            <i class="fa fa-pencil-square-o"></i>删除
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="w60 tc">
+                                        <input type="text" onChange="changeTableVal('weapp_ask_type','type_id','{$vo.type_id}','sort_order',this);" size="4" value="{$vo.sort_order}" class="tc" name="sort_order[]"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            {/volist}
+                        {/empty}
+                        </tbody>
+                    </table>
+                    <div id='Template'></div>
+                </div>
+            </form>
+            <div class="iDiv" style="display: none;"></div>
+        </div>
+        <div class="tDiv">
+            <div class="tDiv2">
+                <div class="fbutton">
+                    <a onclick="AskType(this);">
+                        <div class="add" title="新增栏目">
+                            <span class="red"><i class="fa fa-plus"></i>新增栏目</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="fbutton">
+                    <a href="javascript:void(0);" data-url="{:weapp_url('Ask/Ask/ask_type_data_save')}" onclick="AddAskData(this);">
+                        <div class="add" title="保存">
+                            <span class="">保存</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <!--分页位置-->
+        {$pageStr}
+    </div>
+</div>
+<input type="hidden" id="IsEmpty" value="{$IsEmpty}">
+<script type="text/javascript">
+ 
+    function SeoEdit(obj) {
+        var url = $(obj).data('url');
+        var title = $(obj).data('title');
+        //iframe窗
+        layer.open({
+            type: 2,
+            title: title,
+            fixed: true,
+            shadeClose: false,
+            shade: 0.3,
+            area: ['700px', '400px'],
+            content: url
+        });
+    }
+
+    function AskType(){
+        // tr数,取唯一标识
+        var SerialNum = $('.tr').length;
+        var AddHtml = [];
+        AddHtml += 
+        [
+            '<tr class="tr" id="tr_'+SerialNum+'">'+
+                '<td class="sort">'+
+                    '<div class="w10 tc"><input type="hidden" name="type_id[]"></div>'+
+                '</td>'+
+
+                '<td style="width: 100%">'+
+                    '<div style="">'+
+                        '<input type="text" name="type_name[]" >'+
+                    '</div>'+
+                '</td>'+
+
+                '<td>'+
+                    '<div class="w150 tc">'+
+                        '<select name="parent_id[]">'+
+                            '{volist name="$PidData" id="t_vo"}'+
+                                '<option value="{$t_vo.type_id}" >{$t_vo.type_name}</option>'+
+                            '{/volist}'+
+                        '</select>'+
+                    '</div>'+
+                '</td>'+
+
+                '<td class="">'+
+                    '<div class="w60 tc">'+
+                        '<a class="btn red" href="javascript:void(0);" data-id="tr_'+SerialNum+'" onclick="DelHtml(this)"><i class="fa fa-trash-o"></i>删除</a>'+
+                    '</div>'+
+                '</td>'+
+
+                '<td>'+
+                    '<div class="w60 tc">'+
+                        '<input type="text" name="sort_order[]" class="tc" size="4" value="100">'+
+                    '</div>'+
+                '</td>'+
+            '</tr>'
+        ];
+
+        /*加载方式*/
+        if (1 == $('#IsEmpty').val()) {
+            // 已有栏目数据则执行追加
+            $('#Template').append(AddHtml);
+        }else{
+            if (0 == SerialNum) {
+                // 没有栏目则执行覆盖
+                $('#TbodyTemplate').html(AddHtml);
+            }else{
+                // 已新增过一次则执行追加
+                $('#TbodyTemplate').append(AddHtml);
+            }
+        }
+        /* END */
+    }
+
+    // 删除未保存的级别
+    function DelHtml(obj){
+        $('#'+$(obj).attr('data-id')).remove();
+    }
+
+    // 添加新增数据
+    function AddAskData(obj){
+        layer_loading('正在处理');
+        $.ajax({
+            type : 'post',
+            url : $(obj).attr('data-url'),
+            data : $('#PostForm').serialize(),
+            dataType : 'json',
+            success : function(data){
+                layer.closeAll();
+                if(data.code == 1){
+                    layer.msg(data.msg, {icon: 1, time:1000},function(){
+                        window.location.reload();
+                    });
+                }else{
+                    layer.alert(data.msg, {icon: 2, title:false});
+                }
+            }
+        })
+    }
+
+    $(document).ready(function(){
+        // 表格行点击选中切换
+        $('#flexigrid > table>tbody >tr').click(function(){
+            $(this).toggleClass('trSelected');
+        });
+
+        // 点击刷新数据
+        $('.fa-refresh').click(function(){
+            location.href = location.href;
+        });
+    });
+</script>
+{include file="footer.htm" /}
