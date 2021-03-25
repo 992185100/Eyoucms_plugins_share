@@ -1,0 +1,1036 @@
+{include file="header.htm" /}
+<body style="background-color: rgb(255, 255, 255); overflow: auto; cursor: default; -moz-user-select: inherit;">
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    {include file="bar.htm" /}
+    <form class="form-horizontal" id="post_form" action="{:weapp_url('Ugg/Ugg/save')}" method="post">
+	    <div class="ncap-form-default">
+			<dl class="row">
+                <dt class="tit">
+                    <label>调用方式</label>
+                </dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="tag_weapp1" class="cb-enable {if condition='!isset($ugg.data.tag_weapp) || $ugg.data.tag_weapp eq 1'}selected{/if}">自动调用</label>
+                        <label for="tag_weapp0" class="cb-disable {if condition='isset($ugg.data.tag_weapp) && $ugg.data.tag_weapp eq 2'}selected{/if}">手工调用</label>
+                        <input id="tag_weapp1" name="tag_weapp" value="1" type="radio" {if condition="!isset($ugg.data.tag_weapp) || $ugg.data.tag_weapp eq 1"} checked="checked"{/if}>
+                        <input id="tag_weapp0" name="tag_weapp" value="2" type="radio" {if condition="isset($ugg.data.tag_weapp) && $ugg.data.tag_weapp eq 2"} checked="checked"{/if}>
+                    </div>
+                    <p class="">自动调用会默认绑定weapp模板标签，手工调用：{literal}{:hookexec('Ugg/Ugg/show')}{/literal}。</p>
+                </dd>
+            </dl>
+			<dl class="row">
+                <dt class="tit">
+                    <label>调用JQ</label>
+                </dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="tag_wemnnqrr1" class="cb-enable {if condition='!isset($ugg.data.tag_wemnnqrr) || $ugg.data.tag_wemnnqrr eq 1'}selected{/if}">调用</label>
+                        <label for="tag_wemnnqrr0" class="cb-disable {if condition='isset($ugg.data.tag_wemnnqrr) && $ugg.data.tag_wemnnqrr eq 2'}selected{/if}">关闭</label>
+                        <input id="tag_wemnnqrr1" name="tag_wemnnqrr" value="1" type="radio" {if condition="!isset($ugg.data.tag_wemnnqrr) || $ugg.data.tag_wemnnqrr eq 1"} checked="checked"{/if}>
+                        <input id="tag_wemnnqrr0" name="tag_wemnnqrr" value="2" type="radio" {if condition="isset($ugg.data.tag_wemnnqrr) && $ugg.data.tag_wemnnqrr eq 2"} checked="checked"{/if}>
+                    </div>
+                    <p class="notic"></p>
+                </dd>
+            </dl>
+			<dl class="row">
+                <dt class="tit">
+                    <label>调用cookies.js</label>
+                </dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="tag_wemnnqrrqq1" class="cb-enable {if condition='!isset($ugg.data.tag_wemnnqrrqq) || $ugg.data.tag_wemnnqrrqq eq 1'}selected{/if}">调用</label>
+                        <label for="tag_wemnnqrrqq0" class="cb-disable {if condition='isset($ugg.data.tag_wemnnqrrqq) && $ugg.data.tag_wemnnqrrqq eq 2'}selected{/if}">关闭</label>
+                        <input id="tag_wemnnqrrqq1" name="tag_wemnnqrrqq" value="1" type="radio" {if condition="!isset($ugg.data.tag_wemnnqrrqq) || $ugg.data.tag_wemnnqrrqq eq 1"} checked="checked"{/if}>
+                        <input id="tag_wemnnqrrqq0" name="tag_wemnnqrrqq" value="2" type="radio" {if condition="isset($ugg.data.tag_wemnnqrrqq) && $ugg.data.tag_wemnnqrrqq eq 2"} checked="checked"{/if}>
+                    </div>
+                    <p class="notic"></p>
+                </dd>
+            </dl>
+		    <div class="xgtu1 none" {if condition="!isset($ugg.data.ys_open) || $ugg.data.ys_open eq 5"}style="display: block;"{/if}>
+			    <dl class="row">
+                    <dt class="tit">
+                        <label>效果图</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                           <img class="onoff" src="__WEAPP_TEMPLATE__/style/img/xgtu1.jpg" style="width: 200px;height: 200px;">
+                        </div>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+		    </div>
+		    <div class="xgtu2 none" {if condition="isset($ugg.data.ys_open) && $ugg.data.ys_open eq 4"}style="display: block;"{/if}>
+			    <dl class="row">
+                    <dt class="tit">
+                        <label>效果图</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                           <img class="onoff" src="__WEAPP_TEMPLATE__/style/img/xgtu2.jpg" style="width: 200px;height: 200px;">
+                        </div>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+	    	</div>
+		    <div class="xgtu3 none" {if condition="isset($ugg.data.ys_open) && $ugg.data.ys_open eq 3"}style="display: block;"{/if}>
+		    	<dl class="row">
+                    <dt class="tit">
+                        <label>效果图</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                           <img class="onoff" src="__WEAPP_TEMPLATE__/style/img/xgtu3.jpg" style="width: 200px;height: 200px;">
+                        </div>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+		    </div>
+		    <div class="xgtu4 none" {if condition="isset($ugg.data.ys_open) && $ugg.data.ys_open eq 2"}style="display: block;"{/if}>
+			    <dl class="row">
+                    <dt class="tit">
+                        <label>效果图</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                           <img class="onoff" src="__WEAPP_TEMPLATE__/style/img/xgtu4.jpg" style="width: 200px;height: 200px;">
+                        </div>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+		    </div>
+		    <div class="xgtu5 none" {if condition="isset($ugg.data.ys_open) && $ugg.data.ys_open eq 1"}style="display: block;"{/if}>
+			    <dl class="row">
+                    <dt class="tit">
+                        <label>效果图</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                           <img class="onoff" src="__WEAPP_TEMPLATE__/style/img/xgtu5.jpg" style="width: 200px;height: 200px;">
+                        </div>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+		    </div>
+		    <dl class="row">
+                <dt class="tit">
+                    <label>选择样式</label>
+                </dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="ys_open5" class="cb-enable1 {if condition='!isset($ugg.data.ys_open) || $ugg.data.ys_open eq 5'}selected{/if}">折角广告</label>
+                        <label for="ys_open4" class="cb-enable2 {if condition='isset($ugg.data.ys_open) && $ugg.data.ys_open eq 4'}selected{/if}">对联广告</label>
+						<label for="ys_open3" class="cb-enable3 {if condition='isset($ugg.data.ys_open) && $ugg.data.ys_open eq 3'}selected{/if}">弹出广告</label>
+                        <label for="ys_open2" class="cb-enable4 {if condition='isset($ugg.data.ys_open) && $ugg.data.ys_open eq 2'}selected{/if}">悬浮横幅</label>
+						<label for="ys_open1" class="cb-enable5 {if condition='isset($ugg.data.ys_open) && $ugg.data.ys_open eq 1'}selected{/if}">滚动广告</label>
+						<input id="ys_open5" name="ys_open" value="5" type="radio" {if condition="!isset($ugg.data.ys_open) || $ugg.data.ys_open eq 5"} checked="checked"{/if}>
+                        <input id="ys_open4" name="ys_open" value="4" type="radio" {if condition="isset($ugg.data.ys_open) && $ugg.data.ys_open eq 4"} checked="checked"{/if}>
+						<input id="ys_open3" name="ys_open" value="3" type="radio" {if condition="isset($ugg.data.ys_open) && $ugg.data.ys_open eq 3"} checked="checked"{/if}>
+                        <input id="ys_open2" name="ys_open" value="2" type="radio" {if condition="isset($ugg.data.ys_open) && $ugg.data.ys_open eq 2"} checked="checked"{/if}>
+						<input id="ys_open1" name="ys_open" value="1" type="radio" {if condition="isset($ugg.data.ys_open) && $ugg.data.ys_open eq 1"} checked="checked"{/if}>
+                    </div>
+                    <p class="notic"></p>
+                </dd>
+            </dl>
+			<div class="none bankcon1" {if condition="!isset($ugg.data.ys_open) || $ugg.data.ys_open eq 5"}style="display: block;"{/if}>
+		        <dl class="row">
+                    <dt class="tit">
+                        <label>调用方式</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                            <label for="tag_weapl1" class="cb-enable {if condition='!isset($ugg.data.tag_weapl) || $ugg.data.tag_weapl eq 1'}selected{/if}">开启</label>
+                            <label for="tag_weapl0" class="cb-disable {if condition='isset($ugg.data.tag_weapl) && $ugg.data.tag_weapl eq 2'}selected{/if}">关闭</label>
+                            <input id="tag_weapl1" name="tag_weapl" value="1" type="radio" {if condition="!isset($ugg.data.tag_weapl) || $ugg.data.tag_weapl eq 1"} checked="checked"{/if}>
+                            <input id="tag_weapl0" name="tag_weapl" value="2" type="radio" {if condition="isset($ugg.data.tag_weapl) && $ugg.data.tag_weapl eq 2"} checked="checked"{/if}>
+                        </div>
+                        <p class="notic"></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label>关闭刷新显示</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                            <label for="tag_weapa1" class="cb-enable {if condition='!isset($ugg.data.tag_weapa) || $ugg.data.tag_weapa eq 1'}selected{/if}">显示</label>
+                            <label for="tag_weapa0" class="cb-disable {if condition='isset($ugg.data.tag_weapa) && $ugg.data.tag_weapa eq 2'}selected{/if}">关闭</label>
+                            <input id="tag_weapa1" name="tag_weapa" value="1" type="radio" {if condition="!isset($ugg.data.tag_weapa) || $ugg.data.tag_weapa eq 1"} checked="checked"{/if}>
+                            <input id="tag_weapa0" name="tag_weapa" value="2" type="radio" {if condition="isset($ugg.data.tag_weapa) && $ugg.data.tag_weapa eq 2"} checked="checked"{/if}>
+                        </div>
+                        <p class="notic"></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label>显示方式</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                            <label for="tag_weapfv1" class="cb-enable xb-enable {if condition='!isset($ugg.data.tag_weapfv) || $ugg.data.tag_weapfv eq 1'}selected{/if}">全局</label>
+                            <label for="tag_weapfv0" class="cb-disable xb-disable {if condition='isset($ugg.data.tag_weapfv) && $ugg.data.tag_weapfv eq 2'}selected{/if}">主页</label>
+                            <input id="tag_weapfv1" name="tag_weapfv" value="1" type="radio" {if condition="!isset($ugg.data.tag_weapfv) || $ugg.data.tag_weapfv eq 1"} checked="checked"{/if}>
+                            <input id="tag_weapfv0" name="tag_weapfv" value="2" type="radio" {if condition="isset($ugg.data.tag_weapfv) && $ugg.data.tag_weapfv eq 2"} checked="checked"{/if}>
+                        </div>
+                        <p class="notic"></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label>位置显示</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                            <label for="tag_weapaz1" class="cb-enable xb-enable {if condition='!isset($ugg.data.tag_weapaz) || $ugg.data.tag_weapaz eq 1'}selected{/if}">靠左</label>
+                            <label for="tag_weapaz0" class="cb-disable xb-disable {if condition='isset($ugg.data.tag_weapaz) && $ugg.data.tag_weapaz eq 2'}selected{/if}">靠右</label>
+                            <input id="tag_weapaz1" name="tag_weapaz" value="1" type="radio" {if condition="!isset($ugg.data.tag_weapaz) || $ugg.data.tag_weapaz eq 1"} checked="checked"{/if}>
+                            <input id="tag_weapaz0" name="tag_weapaz" value="2" type="radio" {if condition="isset($ugg.data.tag_weapaz) && $ugg.data.tag_weapaz eq 2"} checked="checked"{/if}>
+                        </div>
+                        <p class="notic"></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label>跟随顶部</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                            <label for="tag_weapazz1" class="cb-enable {if condition='!isset($ugg.data.tag_weapazz) || $ugg.data.tag_weapazz eq 1'}selected{/if}">是</label>
+                            <label for="tag_weapazz0" class="cb-disable {if condition='isset($ugg.data.tag_weapazz) && $ugg.data.tag_weapazz eq 2'}selected{/if}">否</label>
+                            <input id="tag_weapazz1" name="tag_weapazz" value="1" type="radio" {if condition="!isset($ugg.data.tag_weapazz) || $ugg.data.tag_weapazz eq 1"} checked="checked"{/if}>
+                            <input id="tag_weapazz0" name="tag_weapazz" value="2" type="radio" {if condition="isset($ugg.data.tag_weapazz) && $ugg.data.tag_weapazz eq 2"} checked="checked"{/if}>
+                        </div>
+                        <p class="notic"></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label for="toper_heigh">高度</label>
+                    </dt>
+                    <dd class="opt">
+                        <input type="text" name="toper_heigh" value="{$ugg.data.toper_heigh|default='200'}" id="toper_heigh" class="input-txt"> px
+                        <span class="err" style="display: inline-block;margin-left: 20px;">*默认最大高度200px</span>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label for="toper_width">宽度</label>
+                    </dt>
+                    <dd class="opt">
+                        <input type="text" name="toper_width" value="{$ugg.data.toper_width|default='200'}" id="toper_width" class="input-txt"> px
+                        <span class="err" style="display: inline-block;margin-left: 20px;">*默认最大宽度200px</span>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label for="toper_dizhi">广告地址</label>
+                    </dt>
+                    <dd class="opt">
+                        <input type="text" name="toper_dizhi" value="{$ugg.data.toper_dizhi|default='https://www.xxx.com'}" id="toper_width" class="input-txt"> 
+                        <span class="err" style="display: inline-block;margin-left: 20px;">*请以https://或者http://开头</span>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+				<dl class="row none kz" {if condition="!isset($ugg.data.tag_weapaz) || $ugg.data.tag_weapaz eq 1"}style="display: block;"{/if}>
+                    <dt class="tit">
+                        <label for="wechat_logo_local">上传靠左图片</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="input-file-show div_wechat_logo_local" {neq name="$ugg.data.is_remote" value="0"}style="display: none;"{/neq}>
+                            <span class="show">
+                                <a id="img_a_local" target="_blank" class="nyroModal" rel="gal" href="{$ugg.data.wechat_logo_local|default='javascript:void(0);'}">
+                                    <i id="img_i_local" class="fa fa-picture-o" {notempty name="$ugg.data.wechat_logo_local"}onmouseover="layer_tips=layer.tips('<img src={$ugg.data.wechat_logo_local|default=''} class=\'layer_tips_img\'>',this,{tips: [1, '#fff']});"{/notempty} onmouseout="layer.close(layer_tips);"></i>
+                                </a>
+                            </span>
+                            <span class="type-file-box">
+                                <input type="text" id="wechat_logo_local" name="wechat_logo_local" value="{$ugg.data.wechat_logo_local|default=''}" class="type-file-text">
+                                <input type="button" name="button" id="button1" value="选择上传..." class="type-file-button">
+                                <input class="type-file-file" onClick="GetUploadify(1,'','weapp','img_call_back','{:U('Uploadify/upload')}')" size="30" hidefocus="true" nc_type="change_site_logo"
+                                 title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                            </span>
+                        </div>
+                        <input type="text" id="wechat_logo_remote" name="wechat_logo_remote" value="{$ugg.data.wechat_logo_remote|default=''}" placeholder="http://" class="input-txt" {neq name="$ugg.data.is_remote" value="1"}style="display: none;"{/neq}>
+                        &nbsp;
+                        <label><input type="checkbox" name="is_remote" id="is_remote" value="1" {eq name="$ugg.data.is_remote" value="1"}checked="checked"{/eq} onClick="clickRemote(this,     'wechat_logo');">远程图片</label>
+                        <span class="err"></span>
+                        <p class="notic">建议尺寸 200 * 200 (像素) 的png|gif|jpg等图片</p>
+                    </dd>
+                </dl>
+				<dl class="row none ky" {if condition="isset($ugg.data.tag_weapaz) && $ugg.data.tag_weapaz eq 2"}style="display: block;"{/if}>
+                    <dt class="tit">
+                        <label for="public_logo_local">上传靠右图片</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="input-file-show div_public_logo_local" {neq name="$ugg.data.is_remot" value="0"}style="display: none;"{/neq}>
+                            <span class="show">
+                                <a id="img_a_local" target="_blank" class="nyroModal" rel="gal" href="{$ugg.data.public_logo_local|default='javascript:void(0);'}">
+                                    <i id="img_i_local" class="fa fa-picture-o" {notempty name="$ugg.data.public_logo_local"}onmouseover="layer_tips=layer.tips('<img src={$ugg.data.public_logo_local|default=''} class=\'layer_tips_img\'>',this,{tips: [1, '#fff']});"{/notempty} onmouseout="layer.close(layer_tips);"></i>
+                                </a>
+                            </span>
+                            <span class="type-file-box">
+                                <input type="text" id="public_logo_local" name="public_logo_local" value="{$ugg.data.public_logo_local|default=''}" class="type-file-text">
+                                <input type="button" name="button" id="button1" value="选择上传..." class="type-file-button">
+                                <input class="type-file-file" onClick="GetUploadify(1,'','weapp','img_call_public','{:U('Uploadify/upload')}')" size="30" hidefocus="true" nc_type="change_site_logo"
+                                 title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                            </span>
+                        </div>
+                        <input type="text" id="public_logo_remote" name="public_logo_remote" value="{$ugg.data.public_logo_remote|default=''}" placeholder="http://" class="input-txt" {neq name="$ugg.data.is_remot" value="1"}style="display: none;"{/neq}>
+                        &nbsp;
+                        <label><input type="checkbox" name="is_remot" id="is_remot" value="1" {eq name="$ugg.data.is_remot" value="1"}checked="checked"{/eq} onClick="clickRemote(this, 'public_logo');">远程图片</label>
+                        <span class="err"></span>
+                        <p class="notic">建议尺寸 200 * 200 (像素) 的png|gif|jpg等图片</p>
+                    </dd>
+                </dl>
+			</div>
+			<div class="bankcon2 none" {if condition="isset($ugg.data.ys_open) && $ugg.data.ys_open eq 4"}style="display: block;"{/if}>
+			    <dl class="row">
+                    <dt class="tit">
+                        <label>调用方式</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                            <label for="tag_weapzp1" class="cb-enable {if condition='!isset($ugg.data.tag_weapzp) || $ugg.data.tag_weapzp eq 1'}selected{/if}">开启</label>
+                            <label for="tag_weapzp0" class="cb-disable {if condition='isset($ugg.data.tag_weapzp) && $ugg.data.tag_weapzp eq 2'}selected{/if}">关闭</label>
+                            <input id="tag_weapzp1" name="tag_weapzp" value="1" type="radio" {if condition="!isset($ugg.data.tag_weapzp) || $ugg.data.tag_weapzp eq 1"} checked="checked"{/if}>
+                            <input id="tag_weapzp0" name="tag_weapzp" value="2" type="radio" {if condition="isset($ugg.data.tag_weapzp) && $ugg.data.tag_weapzp eq 2"} checked="checked"{/if}>
+                        </div>
+                        <p class="notic">自动调用会默认绑定weapp模板标签，手工调用请参考使用指南的调用方法。</p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label>显示方式</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                            <label for="tag_weapfz1" class="cb-enable xb-enable {if condition='!isset($ugg.data.tag_weapfz) || $ugg.data.tag_weapfz eq 1'}selected{/if}">全局</label>
+                            <label for="tag_weapfz0" class="cb-disable xb-disable {if condition='isset($ugg.data.tag_weapfz) && $ugg.data.tag_weapfz eq 2'}selected{/if}">主页</label>
+                            <input id="tag_weapfz1" name="tag_weapfz" value="1" type="radio" {if condition="!isset($ugg.data.tag_weapfz) || $ugg.data.tag_weapfz eq 1"} checked="checked"{/if}>
+                            <input id="tag_weapfz0" name="tag_weapfz" value="2" type="radio" {if condition="isset($ugg.data.tag_weapfz) && $ugg.data.tag_weapfz eq 2"} checked="checked"{/if}>
+                        </div>
+                        <p class="notic"></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label>关闭刷新显示</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                            <label for="tag_weapaa1" class="cb-enable {if condition='!isset($ugg.data.tag_weapaa) || $ugg.data.tag_weapaa eq 1'}selected{/if}">开启</label>
+                            <label for="tag_weapaa0" class="cb-disable {if condition='isset($ugg.data.tag_weapaa) && $ugg.data.tag_weapaa eq 2'}selected{/if}">关闭</label>
+                            <input id="tag_weapaa1" name="tag_weapaa" value="1" type="radio" {if condition="!isset($ugg.data.tag_weapaa) || $ugg.data.tag_weapaa eq 1"} checked="checked"{/if}>
+                            <input id="tag_weapaa0" name="tag_weapaa" value="2" type="radio" {if condition="isset($ugg.data.tag_weapaa) && $ugg.data.tag_weapaa eq 2"} checked="checked"{/if}>
+                        </div>
+                        <p class="notic">自动调用会默认绑定weapp模板标签，手工调用请参考使用指南的调用方法。</p>
+                    </dd>
+                </dl>
+				<dl class="row">
+              	  	<dt class="tit">
+              	      	<label for="topyi_heighaa">左侧图片宽度</label>
+               	  	</dt>
+                 	<dd class="opt">
+                        <input type="text" name="topyi_heighaa" value="{$ugg.data.topyi_heighaa|default='160'}" id="topyi_heighaa" class="input-txt"> px
+                        <span class="err"></span>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+              	  	<dt class="tit">
+              	      	<label for="topyi_heighzz">左侧图片高度</label>
+               	  	</dt>
+                 	<dd class="opt">
+                        <input type="text" name="topyi_heighzz" value="{$ugg.data.topyi_heighzz|default='160'}" id="topyi_heighzz" class="input-txt"> px
+                        <span class="err"></span>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+              	  	<dt class="tit">
+              	      	<label for="topyi_heigh">左侧距离底部</label>
+               	  	</dt>
+                 	<dd class="opt">
+                        <input type="text" name="topyi_heigh" value="{$ugg.data.topyi_heigh|default='50'}" id="topyi_heigh" class="input-txt"> px
+                        <span class="err"></span>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+              	  	<dt class="tit">
+              	      	<label for="topyi_heighh">左侧靠边距离</label>
+               	  	</dt>
+                 	<dd class="opt">
+                        <input type="text" name="topyi_heighh" value="{$ugg.data.topyi_heighh|default='20'}" id="topyi_heighh" class="input-txt"> px
+                        <span class="err"></span>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+              	  	<dt class="tit">
+              	      	<label for="topyi_heighhdd">左侧广告地址</label>
+               	  	</dt>
+                 	<dd class="opt">
+                        <input type="text" name="topyi_heighhdd" value="{$ugg.data.topyi_heighhdd|default='https://www.xxx.com'}" id="topyi_heighhdd" class="input-txt">
+                        <span class="err" style="display: inline-block;margin-left: 20px;">*请以https://或者http://开头</span>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                	<dt class="tit">
+                  	 	<label for="publicyi_logo_local">左侧图片</label>
+               		</dt>
+               		<dd class="opt">
+                   		<div class="input-file-show div_publicyi_logo_local" {neq name="$ugg.data.is_remotyi" value="0"}style="display: none;"{/neq}>
+                    		<span class="show">
+                            	<a id="img_a_local" target="_blank" class="nyroModal" rel="gal" href="{$ugg.data.publicyi_logo_local|default='javascript:void(0);'}">
+                                	<i id="img_i_local" class="fa fa-picture-o" {notempty name="$ugg.data.publicyi_logo_local"}onmouseover="layer_tips=layer.tips('<img src={$ugg.data.publicyi_logo_local|default=''} class=\'layer_tips_img\'>',this,{tips: [1, '#fff']});"{/notempty} onmouseout="layer.close(layer_tips);"></i>
+                            	</a>
+                        	</span>
+                        	<span class="type-file-box">
+                            	<input type="text" id="publicyi_logo_local" name="publicyi_logo_local" value="{$ugg.data.publicyi_logo_local|default=''}" class="type-file-text">
+                            	<input type="button" name="button" id="button1" value="选择上传..." class="type-file-button">
+                            	<input class="type-file-file" onClick="GetUploadify(1,'','weapp','img_call_publicyi','{:U('Uploadify/upload')}')" size="30" hidefocus="true" nc_type="change_site_logo"
+                                 title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        	</span>
+                    	</div>
+                    	<input type="text" id="publicyi_logo_remote" name="publicyi_logo_remote" value="{$ugg.data.publicyi_logo_remote|default=''}" placeholder="http://" class="input-txt" {neq name="$ugg.data.is_remotyi" value="1"}style="display: none;"{/neq}>
+                    	&nbsp;
+                    	<label><input type="checkbox" name="is_remotyi" id="is_remotyi" value="1" {eq name="$ugg.data.is_remotyi" value="1"}checked="checked"{/eq} onClick="clickRemote(this, 'publicyi_logo');">远程图片</label>
+                    	<span class="err"></span>
+                    	<p class="notic">建议尺寸 200 * 200 (像素) 的png|gif|jpg等图片</p>
+                	</dd>
+            	</dl>
+				<dl class="row">
+              	  	<dt class="tit">
+              	      	<label for="topyi_heighaaz">右侧图片宽度</label>
+               	  	</dt>
+                 	<dd class="opt">
+                        <input type="text" name="topyi_heighaaz" value="{$ugg.data.topyi_heighaaz|default='160'}" id="topyi_heighaaz" class="input-txt"> px
+                        <span class="err"></span>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+              	  	<dt class="tit">
+              	      	<label for="topyi_heighzza">右侧图片高度</label>
+               	  	</dt>
+                 	<dd class="opt">
+                        <input type="text" name="topyi_heighzza" value="{$ugg.data.topyi_heighzza|default='160'}" id="topyi_heighzza" class="input-txt"> px
+                        <span class="err"></span>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label for="rightyi_space">右侧距离底部</label>
+                    </dt>
+                    <dd class="opt">
+                        <input type="text" name="rightyi_space" value="{$ugg.data.rightyi_space|default='50'}" id="rightyi_space" class="input-txt"> px
+                        <span class="err"></span>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label for="rightyi_spaceh">右侧靠边距离</label>
+                    </dt>
+                    <dd class="opt">
+                        <input type="text" name="rightyi_spaceh" value="{$ugg.data.rightyi_spaceh|default='20'}" id="rightyi_spaceh" class="input-txt"> px
+                        <span class="err"></span>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label for="rightyi_spacehdz">右侧广告地址</label>
+                    </dt>
+                    <dd class="opt">
+                        <input type="text" name="rightyi_spacehdz" value="{$ugg.data.rightyi_spacehdz|default='https://www.xxx.com'}" id="rightyi_spacehdz" class="input-txt">
+                        <span class="err" style="display: inline-block;margin-left: 20px;">*请以https://或者http://开头</span>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+			    <dl class="row">
+                	<dt class="tit">
+                    	<label for="publicyq_logo_local">右侧图片</label>
+                	</dt>
+                	<dd class="opt">
+                    	<div class="input-file-show div_publicyq_logo_local" {neq name="$ugg.data.is_remotyq" value="0"}style="display: none;"{/neq}>
+                        	<span class="show">
+                            	<a id="img_a_local" target="_blank" class="nyroModal" rel="gal" href="{$ugg.data.publicyq_logo_local|default='javascript:void(0);'}">
+                                	<i id="img_i_local" class="fa fa-picture-o" {notempty name="$ugg.data.publicyq_logo_local"}onmouseover="layer_tips=layer.tips('<img src={$ugg.data.publicyq_logo_local|default=''} class=\'layer_tips_img\'>',this,{tips: [1, '#fff']});"{/notempty} onmouseout="layer.close(layer_tips);"></i>
+                            	</a>
+                        	</span>
+                        	<span class="type-file-box">
+                            	<input type="text" id="publicyq_logo_local" name="publicyq_logo_local" value="{$ugg.data.publicyq_logo_local|default=''}" class="type-file-text">
+                            	<input type="button" name="button" id="button1" value="选择上传..." class="type-file-button">
+                            	<input class="type-file-file" onClick="GetUploadify(1,'','weapp','img_call_publicyq','{:U('Uploadify/upload')}')" size="30" hidefocus="true" nc_type="change_site_logo"
+                                 title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        	</span>
+                    	</div>
+                    	<input type="text" id="publicyq_logo_remote" name="publicyq_logo_remote" value="{$ugg.data.publicyq_logo_remote|default=''}" placeholder="http://" class="input-txt" {neq name="$ugg.data.is_remotyq" value="1"}style="display: none;"{/neq}>
+                    	&nbsp;
+                    	<label><input type="checkbox" name="is_remotyq" id="is_remotyq" value="1" {eq name="$ugg.data.is_remotyq" value="1"}checked="checked"{/eq} onClick="clickRemote(this, 'publicyq_logo');">远程图片</label>
+                    	<span class="err"></span>
+                    	<p class="notic">建议尺寸 200 * 200 (像素) 的png|gif|jpg等图片</p>
+                	</dd>
+            	</dl>
+			</div>
+			<div class="bankcon3 none" {if condition="isset($ugg.data.ys_open) && $ugg.data.ys_open eq 3"}style="display: block;"{/if}>
+			    <dl class="row">
+                    <dt class="tit">
+                        <label>调用方式</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                            <label for="tag_weappp1" class="cb-enable {if condition='!isset($ugg.data.tag_weappp) || $ugg.data.tag_weappp eq 1'}selected{/if}">开启</label>
+                            <label for="tag_weappp0" class="cb-disable {if condition='isset($ugg.data.tag_weappp) && $ugg.data.tag_weappp eq 2'}selected{/if}">关闭</label>
+                            <input id="tag_weappp1" name="tag_weappp" value="1" type="radio" {if condition="!isset($ugg.data.tag_weappp) || $ugg.data.tag_weappp eq 1"} checked="checked"{/if}>
+                            <input id="tag_weappp0" name="tag_weappp" value="2" type="radio" {if condition="isset($ugg.data.tag_weappp) && $ugg.data.tag_weappp eq 2"} checked="checked"{/if}>
+                        </div>
+                        <p class="notic">自动调用会默认绑定weapp模板标签，手工调用请参考使用指南的调用方法。</p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label>显示方式</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                            <label for="tag_weapfc1" class="cb-enable xb-enable {if condition='!isset($ugg.data.tag_weapfc) || $ugg.data.tag_weapfc eq 1'}selected{/if}">全局</label>
+                            <label for="tag_weapfc0" class="cb-disable xb-disable {if condition='isset($ugg.data.tag_weapfc) && $ugg.data.tag_weapfc eq 2'}selected{/if}">主页</label>
+                            <input id="tag_weapfc1" name="tag_weapfc" value="1" type="radio" {if condition="!isset($ugg.data.tag_weapfc) || $ugg.data.tag_weapfc eq 1"} checked="checked"{/if}>
+                            <input id="tag_weapfc0" name="tag_weapfc" value="2" type="radio" {if condition="isset($ugg.data.tag_weapfc) && $ugg.data.tag_weapfc eq 2"} checked="checked"{/if}>
+                        </div>
+                        <p class="notic"></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label>关闭刷新显示</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                            <label for="tag_weapas1" class="cb-enable {if condition='!isset($ugg.data.tag_weapas) || $ugg.data.tag_weapas eq 1'}selected{/if}">开启</label>
+                            <label for="tag_weapas0" class="cb-disable {if condition='isset($ugg.data.tag_weapas) && $ugg.data.tag_weapas eq 2'}selected{/if}">关闭</label>
+                            <input id="tag_weapas1" name="tag_weapas" value="1" type="radio" {if condition="!isset($ugg.data.tag_weapas) || $ugg.data.tag_weapas eq 1"} checked="checked"{/if}>
+                            <input id="tag_weapas0" name="tag_weapas" value="2" type="radio" {if condition="isset($ugg.data.tag_weapas) && $ugg.data.tag_weapas eq 2"} checked="checked"{/if}>
+                        </div>
+                        <p class="notic">自动调用会默认绑定weapp模板标签，手工调用请参考使用指南的调用方法。</p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                	<dt class="tit">
+                   		<label for="rxy_consultq">图片宽度</label>
+               		</dt>
+                	<dd class="opt">
+                    	<input type="text" name="rxy_consultq" value="{$ugg.data.rxy_consultq|default='100%'}" id="rxy_consultq" class="input-txt">
+                    	<span class="err"></span>
+                    	<p class=""></p>
+                	</dd>
+            	</dl>
+				<dl class="row">
+                	<dt class="tit">
+                   		<label for="rxy_consult">图片高度</label>
+               		</dt>
+                	<dd class="opt">
+                    	<input type="text" name="rxy_consult" value="{$ugg.data.rxy_consult|default='500px'}" id="rxy_consult" class="input-txt">
+                    	<span class="err"></span>
+                    	<p class=""></p>
+                	</dd>
+            	</dl>
+				<dl class="row">
+                	<dt class="tit">
+                   		<label for="rxy_consultw">底部距离</label>
+               		</dt>
+                	<dd class="opt">
+                    	<input type="text" name="rxy_consultw" value="{$ugg.data.rxy_consultw|default='0'}" id="rxy_consultw" class="input-txt">
+                    	<span class="err"></span>
+                    	<p class=""></p>
+                	</dd>
+            	</dl>
+				<dl class="row">
+                	<dt class="tit">
+                   		<label for="rxy_consulte">广告地址</label>
+               		</dt>
+                	<dd class="opt">
+                    	<input type="text" name="rxy_consulte" value="{$ugg.data.rxy_consulte|default='https://www.xxx.com/'}" id="rxy_consulte" class="input-txt">
+                    	<span class="err" style="display: inline-block;margin-left: 20px;">*请以https://或者http://开头</span>
+                    	<p class=""></p>
+                	</dd>
+            	</dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label for="publicyw_logo_local">上传图片</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="input-file-show div_publicyw_logo_local" {neq name="$ugg.data.is_remotyw" value="0"}style="display: none;"{/neq}>
+                            <span class="show">
+                                <a id="img_a_local" target="_blank" class="nyroModal" rel="gal" href="{$ugg.data.publicyw_logo_local|default='javascript:void(0);'}">
+                                    <i id="img_i_local" class="fa fa-picture-o" {notempty name="$ugg.data.publicyw_logo_local"}onmouseover="layer_tips=layer.tips('<img src={$ugg.data.publicyw_logo_local|default=''} class=\'layer_tips_img\'>',this,{tips: [1, '#fff']});"{/notempty} onmouseout="layer.close(layer_tips);"></i>
+                                </a>
+                            </span>
+                            <span class="type-file-box">
+                                <input type="text" id="publicyw_logo_local" name="publicyw_logo_local" value="{$ugg.data.publicyw_logo_local|default=''}" class="type-file-text">
+                                <input type="button" name="button" id="button1" value="选择上传..." class="type-file-button">
+                                <input class="type-file-file" onClick="GetUploadify(1,'','weapp','img_call_publicyw','{:U('Uploadify/upload')}')" size="30" hidefocus="true" nc_type="change_site_logo"
+                                 title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                            </span>
+                        </div>
+                        <input type="text" id="publicyw_logo_remote" name="publicyw_logo_remote" value="{$ugg.data.publicyw_logo_remote|default=''}" placeholder="http://" class="input-txt" {neq name="$ugg.data.is_remotyw" value="1"}style="display: none;"{/neq}>
+                        &nbsp;
+                        <label><input type="checkbox" name="is_remotyw" id="is_remotyw" value="1" {eq name="$ugg.data.is_remotyw" value="1"}checked="checked"{/eq} onClick="clickRemote(this, 'publicyw_logo');">远程图片</label>
+                        <span class="err"></span>
+                        <p class="notic">建议尺寸 200 * 200 (像素) 的png|gif|jpg等图片</p>
+                    </dd>
+                </dl>
+			</div>
+			<div class="bankcon4 none" {if condition="isset($ugg.data.ys_open) && $ugg.data.ys_open eq 2"}style="display: block;"{/if}>
+			    <dl class="row">
+                    <dt class="tit">
+                        <label>调用方式</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                            <label for="tag_weapppp1" class="cb-enable {if condition='!isset($ugg.data.tag_weapppp) || $ugg.data.tag_weapppp eq 1'}selected{/if}">开启</label>
+                            <label for="tag_weapppp0" class="cb-disable {if condition='isset($ugg.data.tag_weapppp) && $ugg.data.tag_weapppp eq 2'}selected{/if}">关闭</label>
+                            <input id="tag_weapppp1" name="tag_weapppp" value="1" type="radio" {if condition="!isset($ugg.data.tag_weapppp) || $ugg.data.tag_weapppp eq 1"} checked="checked"{/if}>
+                            <input id="tag_weapppp0" name="tag_weapppp" value="2" type="radio" {if condition="isset($ugg.data.tag_weapppp) && $ugg.data.tag_weapppp eq 2"} checked="checked"{/if}>
+                        </div>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label>显示方式</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                            <label for="tag_weapfb1" class="cb-enable xb-enable {if condition='!isset($ugg.data.tag_weapfb) || $ugg.data.tag_weapfb eq 1'}selected{/if}">全局</label>
+                            <label for="tag_weapfb0" class="cb-disable xb-disable {if condition='isset($ugg.data.tag_weapfb) && $ugg.data.tag_weapfb eq 2'}selected{/if}">主页</label>
+                            <input id="tag_weapfb1" name="tag_weapfb" value="1" type="radio" {if condition="!isset($ugg.data.tag_weapfb) || $ugg.data.tag_weapfb eq 1"} checked="checked"{/if}>
+                            <input id="tag_weapfb0" name="tag_weapfb" value="2" type="radio" {if condition="isset($ugg.data.tag_weapfb) && $ugg.data.tag_weapfb eq 2"} checked="checked"{/if}>
+                        </div>
+                        <p class="notic"></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label>关闭刷新显示</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                            <label for="tag_weapad1" class="cb-enable {if condition='!isset($ugg.data.tag_weapad) || $ugg.data.tag_weapad eq 1'}selected{/if}">显示</label>
+                            <label for="tag_weapad0" class="cb-disable {if condition='isset($ugg.data.tag_weapad) && $ugg.data.tag_weapad eq 2'}selected{/if}">关闭</label>
+                            <input id="tag_weapad1" name="tag_weapad" value="1" type="radio" {if condition="!isset($ugg.data.tag_weapad) || $ugg.data.tag_weapad eq 1"} checked="checked"{/if}>
+                            <input id="tag_weapad0" name="tag_weapad" value="2" type="radio" {if condition="isset($ugg.data.tag_weapad) && $ugg.data.tag_weapad eq 2"} checked="checked"{/if}>
+                        </div>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label>收缩显示位置</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                            <label for="tag_weapadff1" class="cb-enable {if condition='!isset($ugg.data.tag_weapadff) || $ugg.data.tag_weapadff eq 1'}selected{/if}">右边</label>
+                            <label for="tag_weapadff0" class="cb-disable {if condition='isset($ugg.data.tag_weapadff) && $ugg.data.tag_weapadff eq 2'}selected{/if}">左边</label>
+                            <input id="tag_weapadff1" name="tag_weapadff" value="1" type="radio" {if condition="!isset($ugg.data.tag_weapadff) || $ugg.data.tag_weapadff eq 1"} checked="checked"{/if}>
+                            <input id="tag_weapadff0" name="tag_weapadff" value="2" type="radio" {if condition="isset($ugg.data.tag_weapadff) && $ugg.data.tag_weapadff eq 2"} checked="checked"{/if}>
+                        </div>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                	<dt class="tit">
+                   		<label for="rxy_consultezzx">图片底部距离</label>
+               		</dt>
+                	<dd class="opt">
+                    	<input type="text" name="rxy_consultezzx" value="{$ugg.data.rxy_consultezzx|default='0'}" id="rxy_consultezzx" class="input-txt">
+                    	<span class="err"></span>
+                    	<p class=""></p>
+                	</dd>
+            	</dl>
+				<dl class="row">
+                	<dt class="tit">
+                   		<label for="rxy_consultezz">广告地址</label>
+               		</dt>
+                	<dd class="opt">
+                    	<input type="text" name="rxy_consultezz" value="{$ugg.data.rxy_consultezz|default='https://www.xxx.com/'}" id="rxy_consultezz" class="input-txt">
+                    	<span class="err" style="display: inline-block;margin-left: 20px;">*请以https://或者http://开头</span>
+                    	<p class=""></p>
+                	</dd>
+            	</dl>
+				<dl class="row">
+                	<dt class="tit">
+                   		<label for="rxy_consultezzc">收缩图片宽度</label>
+               		</dt>
+                	<dd class="opt">
+                    	<input type="text" name="rxy_consultezzc" value="{$ugg.data.rxy_consultezzc|default='184px'}" id="rxy_consultezzc" class="input-txt">
+                    	<span class="err"></span>
+                    	<p class=""></p>
+                	</dd>
+            	</dl>
+				<dl class="row">
+                	<dt class="tit">
+                   		<label for="rxy_consultezzv">收缩图片高度</label>
+               		</dt>
+                	<dd class="opt">
+                    	<input type="text" name="rxy_consultezzv" value="{$ugg.data.rxy_consultezzv|default='124px'}" id="rxy_consultezzv" class="input-txt">
+                    	<span class="err"></span>
+                    	<p class=""></p>
+                	</dd>
+            	</dl>
+				<dl class="row">
+                	<dt class="tit">
+                   		<label for="rxy_consultezzb">收缩图片边距</label>
+               		</dt>
+                	<dd class="opt">
+                    	<input type="text" name="rxy_consultezzb" value="{$ugg.data.rxy_consultezzb|default='0'}" id="rxy_consultezzb" class="input-txt">
+                    	<span class="err"></span>
+                    	<p class=""></p>
+                	</dd>
+            	</dl>
+				<dl class="row">
+            	    <dt class="tit">
+            	        <label for="publicyweq_logo_local">上传收缩图片</label>
+            	    </dt>
+            	    <dd class="opt">
+            	        <div class="input-file-show div_publicyweq_logo_local" {neq name="$ugg.data.is_remotyweq" value="0"}style="display: none;"{/neq}>
+            	            <span class="show">
+            	                <a id="img_a_local" target="_blank" class="nyroModal" rel="gal" href="{$ugg.data.publicyweq_logo_local|default='javascript:void(0);'}">
+            	                    <i id="img_i_local" class="fa fa-picture-o" {notempty name="$ugg.data.publicyweq_logo_local"}onmouseover="layer_tips=layer.tips('<img src={$ugg.data.publicyweq_logo_local|default=''} class=\'layer_tips_img\'>',this,{tips: [1, '#fff']});"{/notempty} onmouseout="layer.close(layer_tips);"></i>
+                            	</a>
+                        	</span>
+                        	<span class="type-file-box">
+                            	<input type="text" id="publicyweq_logo_local" name="publicyweq_logo_local" value="{$ugg.data.publicyweq_logo_local|default=''}" class="type-file-text">
+                            	<input type="button" name="button" id="button1" value="选择上传..." class="type-file-button">
+                            	<input class="type-file-file" onClick="GetUploadify(1,'','weapp','img_call_publicyweq','{:U('Uploadify/upload')}')" size="30" hidefocus="true" nc_type="change_site_logo"
+                                 title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        	</span>
+                    	</div>
+                    	<input type="text" id="publicyweq_logo_remote" name="publicyweq_logo_remote" value="{$ugg.data.publicyweq_logo_remote|default=''}" placeholder="http://" class="input-txt" {neq name="$ugg.data.is_remotyweq" value="1"}style="display: none;"{/neq}>
+                    	&nbsp;
+                    	<label><input type="checkbox" name="is_remotyweq" id="is_remotyweq" value="1" {eq name="$ugg.data.is_remotyweq" value="1"}checked="checked"{/eq} onClick="clickRemote(this, 'publicyweq_logo');">远程图片</label>
+                    	<span class="err"></span>
+                    	<p class="notic">建议尺寸 200 * 200 (像素) 的png|gif|jpg等图片</p>
+                	</dd>
+            	</dl>
+				<dl class="row">
+                	<dt class="tit">
+                   		<label for="rxy_consultezzn">拉伸图片高度</label>
+               		</dt>
+                	<dd class="opt">
+                    	<input type="text" name="rxy_consultezzn" value="{$ugg.data.rxy_consultezzn|default='128px'}" id="rxy_consultezzn" class="input-txt">
+                    	<span class="err"></span>
+                    	<p class=""></p>
+                	</dd>
+            	</dl>
+				<dl class="row">
+                	<dt class="tit">
+                   		<label for="rxy_consultezzm">拉伸图片宽度</label>
+               		</dt>
+                	<dd class="opt">
+                    	<input type="text" name="rxy_consultezzm" value="{$ugg.data.rxy_consultezzm|default='100%'}" id="rxy_consultezzm" class="input-txt">
+                    	<span class="err"></span>
+                    	<p class=""></p>
+                	</dd>
+            	</dl>
+				<dl class="row">
+                	<dt class="tit">
+                    	<label for="publicywe_logo_local">上传拉伸图片</label>
+                	</dt>
+                	<dd class="opt">
+                    	<div class="input-file-show div_publicywe_logo_local" {neq name="$ugg.data.is_remotywe" value="0"}style="display: none;"{/neq}>
+                        	<span class="show">
+                            	<a id="img_a_local" target="_blank" class="nyroModal" rel="gal" href="{$ugg.data.publicywe_logo_local|default='javascript:void(0);'}">
+                                	<i id="img_i_local" class="fa fa-picture-o" {notempty name="$ugg.data.publicywe_logo_local"}onmouseover="layer_tips=layer.tips('<img src={$ugg.data.publicywe_logo_local|default=''} class=\'layer_tips_img\'>',this,{tips: [1, '#fff']});"{/notempty} onmouseout="layer.close(layer_tips);"></i>
+                           		</a>
+                        	</span>
+                        	<span class="type-file-box">
+                            	<input type="text" id="publicywe_logo_local" name="publicywe_logo_local" value="{$ugg.data.publicywe_logo_local|default=''}" class="type-file-text">
+                            	<input type="button" name="button" id="button1" value="选择上传..." class="type-file-button">
+                            	<input class="type-file-file" onClick="GetUploadify(1,'','weapp','img_call_publicywe','{:U('Uploadify/upload')}')" size="30" hidefocus="true" nc_type="change_site_logo"
+                                 title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        	</span>
+                    	</div>
+                    	<input type="text" id="publicywe_logo_remote" name="publicywe_logo_remote" value="{$ugg.data.publicywe_logo_remote|default=''}" placeholder="http://" class="input-txt" {neq name="$ugg.data.is_remotywe" value="1"}style="display: none;"{/neq}>
+                    	&nbsp;
+                    	<label><input type="checkbox" name="is_remotywe" id="is_remotywe" value="1" {eq name="$ugg.data.is_remotywe" value="1"}checked="checked"{/eq} onClick="clickRemote(this, 'publicywe_logo');">远程图片</label>
+                    	<span class="err"></span>
+                    	<p class="notic">建议尺寸 200 * 200 (像素) 的png|gif|jpg等图片</p>
+               		</dd>
+            	</dl>
+			</div>
+			<div class="bankcon5 none" {if condition="isset($ugg.data.ys_open) && $ugg.data.ys_open eq 1"}style="display: block;"{/if}>
+			    <dl class="row">
+                    <dt class="tit">
+                        <label>调用方式</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                            <label for="tag_weappq1" class="cb-enable {if condition='!isset($ugg.data.tag_weappq) || $ugg.data.tag_weappq eq 1'}selected{/if}">开启</label>
+                            <label for="tag_weappq0" class="cb-disable {if condition='isset($ugg.data.tag_weappq) && $ugg.data.tag_weappq eq 2'}selected{/if}">关闭</label>
+                            <input id="tag_weappq1" name="tag_weappq" value="1" type="radio" {if condition="!isset($ugg.data.tag_weappq) || $ugg.data.tag_weappq eq 1"} checked="checked"{/if}>
+                            <input id="tag_weappq0" name="tag_weappq" value="2" type="radio" {if condition="isset($ugg.data.tag_weappq) && $ugg.data.tag_weappq eq 2"} checked="checked"{/if}>
+                        </div>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label>显示方式</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                            <label for="tag_weapfm1" class="cb-enable xb-enable {if condition='!isset($ugg.data.tag_weapfm) || $ugg.data.tag_weapfm eq 1'}selected{/if}">全局</label>
+                            <label for="tag_weapfm0" class="cb-disable xb-disable {if condition='isset($ugg.data.tag_weapfm) && $ugg.data.tag_weapfm eq 2'}selected{/if}">主页</label>
+                            <input id="tag_weapfm1" name="tag_weapfm" value="1" type="radio" {if condition="!isset($ugg.data.tag_weapfm) || $ugg.data.tag_weapfm eq 1"} checked="checked"{/if}>
+                            <input id="tag_weapfm0" name="tag_weapfm" value="2" type="radio" {if condition="isset($ugg.data.tag_weapfm) && $ugg.data.tag_weapfm eq 2"} checked="checked"{/if}>
+                        </div>
+                        <p class="notic"></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                    <dt class="tit">
+                        <label>关闭刷新显示</label>
+                    </dt>
+                    <dd class="opt">
+                        <div class="onoff">
+                            <label for="tag_weapaf1" class="cb-enable {if condition='!isset($ugg.data.tag_weapaf) || $ugg.data.tag_weapaf eq 1'}selected{/if}">显示</label>
+                            <label for="tag_weapaf0" class="cb-disable {if condition='isset($ugg.data.tag_weapaf) && $ugg.data.tag_weapaf eq 2'}selected{/if}">关闭</label>
+                            <input id="tag_weapaf1" name="tag_weapaf" value="1" type="radio" {if condition="!isset($ugg.data.tag_weapaf) || $ugg.data.tag_weapaf eq 1"} checked="checked"{/if}>
+                            <input id="tag_weapaf0" name="tag_weapaf" value="2" type="radio" {if condition="isset($ugg.data.tag_weapaf) && $ugg.data.tag_weapaf eq 2"} checked="checked"{/if}>
+                        </div>
+                        <p class=""></p>
+                    </dd>
+                </dl>
+				<dl class="row">
+                	<dt class="tit">
+                    	<label for="zxhyffll_spaceq">图片宽度</label>
+                	</dt>
+                	<dd class="opt">
+                    	<input type="text" name="zxhyffll_spaceq" value="{$ugg.data.zxhyffll_spaceq|default='210'}" id="zxhyffll_spaceq" class="input-txt">px
+                    	<span class="err"></span>
+                    	<p class=""></p>
+                	</dd>
+            	</dl>
+				<dl class="row">
+                	<dt class="tit">
+                    	<label for="zxhyffll_spaceqq">图片高度</label>
+                	</dt>
+                	<dd class="opt">
+                    	<input type="text" name="zxhyffll_spaceqq" value="{$ugg.data.zxhyffll_spaceqq|default='70'}" id="zxhyffll_spaceqq" class="input-txt">px
+                    	<span class="err"></span>
+                    	<p class=""></p>
+                	</dd>
+            	</dl>
+				<dl class="row">
+                	<dt class="tit">
+                    	<label for="zxhyffll_spaceqqq">广告地址</label>
+                	</dt>
+                	<dd class="opt">
+                    	<input type="text" name="zxhyffll_spaceqqq" value="{$ugg.data.zxhyffll_spaceqqq|default='https://www.xxx.com/'}" id="zxhyffll_spaceqqq" class="input-txt">
+                    	<span class="err" style="display: inline-block;margin-left: 20px;">*请以https://或者http://开头</span>
+                    	<p class=""></p>
+                	</dd>
+            	</dl>
+				<dl class="row">
+                	<dt class="tit">
+                    	<label for="publicywett_logo_local">上传图片</label>
+                	</dt>
+                	<dd class="opt">
+                    	<div class="input-file-show div_publicywett_logo_local" {neq name="$ugg.data.is_remotywett" value="0"}style="display: none;"{/neq}>
+                        	<span class="show">
+                            	<a id="img_a_local" target="_blank" class="nyroModal" rel="gal" href="{$ugg.data.publicywett_logo_local|default='javascript:void(0);'}">
+                                	<i id="img_i_local" class="fa fa-picture-o" {notempty name="$ugg.data.publicywett_logo_local"}onmouseover="layer_tips=layer.tips('<img src={$ugg.data.publicywett_logo_local|default=''} class=\'layer_tips_img\'>',this,{tips: [1, '#fff']});"{/notempty} onmouseout="layer.close(layer_tips);"></i>
+                           		</a>
+                        	</span>
+                        	<span class="type-file-box">
+                            	<input type="text" id="publicywett_logo_local" name="publicywett_logo_local" value="{$ugg.data.publicywett_logo_local|default=''}" class="type-file-text">
+                            	<input type="button" name="button" id="button1" value="选择上传..." class="type-file-button">
+                            	<input class="type-file-file" onClick="GetUploadify(1,'','weapp','img_call_publicywett','{:U('Uploadify/upload')}')" size="30" hidefocus="true" nc_type="change_site_logo"
+                                 title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        	</span>
+                    	</div>
+                    	<input type="text" id="publicywett_logo_remote" name="publicywett_logo_remote" value="{$ugg.data.publicywett_logo_remote|default=''}" placeholder="http://" class="input-txt" {neq name="$ugg.data.is_remotywett" value="1"}style="display: none;"{/neq}>
+                    	&nbsp;
+                    	<label><input type="checkbox" name="is_remotywett" id="is_remotywett" value="1" {eq name="$ugg.data.is_remotywett" value="1"}checked="checked"{/eq} onClick="clickRemote(this, 'publicywett_logo');">远程图片</label>
+                    	<span class="err"></span>
+                    	<p class="notic">建议尺寸 200 * 200 (像素) 的png|gif|jpg等图片</p>
+               		</dd>
+            	</dl>
+			</div>
+			<div class="bot">
+                <input type="hidden" name="code" value="{$ugg.code|default=$weappInfo.code}">
+                <a href="JavaScript:void(0);" onclick="checkForm();" class="ncap-btn-big ncap-btn-green" id="submitBtn">确认提交</a>
+            </div>
+		</div>
+	</form>
+</div>
+<script>
+    $(document).ready(function(){
+    $(".xb-enable").click(function(){
+        $('.kz').css('display', 'block');
+        $('.ky').css('display', 'none');
+    });
+    $(".xb-disable").click(function(){
+        $('.ky').css('display', 'block');
+        $('.kz').css('display', 'none');
+    });
+	//自定义radio样式
+    $(".cb-enable1").click(function(){
+        var parent = $(this).parents('.onoff');
+		$('.cb-enable2',parent).removeClass('selected');
+		$('.cb-enable3',parent).removeClass('selected');
+		$('.cb-enable4',parent).removeClass('selected');
+		$('.cb-enable5',parent).removeClass('selected');
+		$('.bankcon1').css('display', 'block');
+		$('.bankcon2').css('display', 'none');
+		$('.bankcon3').css('display', 'none');
+		$('.bankcon4').css('display', 'none');
+		$('.bankcon5').css('display', 'none');
+		$('.xgtu1').css('display', 'block');
+		$('.xgtu2').css('display', 'none');
+		$('.xgtu3').css('display', 'none');
+		$('.xgtu4').css('display', 'none');
+		$('.xgtu5').css('display', 'none');
+		$(this).addClass('selected');
+        $('.checkbox',parent).attr('checked', true);
+    });
+    $(".cb-enable2").click(function(){
+        var parent = $(this).parents('.onoff');
+		$('.cb-enable1',parent).removeClass('selected');
+		$('.cb-enable3',parent).removeClass('selected');
+		$('.cb-enable4',parent).removeClass('selected');
+		$('.cb-enable5',parent).removeClass('selected');
+		$('.bankcon1').css('display', 'none');
+		$('.bankcon2').css('display', 'block');
+		$('.bankcon3').css('display', 'none');
+		$('.bankcon4').css('display', 'none');
+		$('.bankcon5').css('display', 'none');
+		$('.xgtu1').css('display', 'none');
+		$('.xgtu2').css('display', 'block');
+		$('.xgtu3').css('display', 'none');
+		$('.xgtu4').css('display', 'none');
+		$('.xgtu5').css('display', 'none');
+        $(this).addClass('selected');
+        $('.checkbox',parent).attr('checked', true);
+    });
+    $(".cb-enable3").click(function(){
+        var parent = $(this).parents('.onoff');
+		$('.cb-enable1',parent).removeClass('selected');
+		$('.cb-enable2',parent).removeClass('selected');
+		$('.cb-enable4',parent).removeClass('selected');
+		$('.cb-enable5',parent).removeClass('selected');
+		$('.bankcon1').css('display', 'none');
+		$('.bankcon2').css('display', 'none');
+		$('.bankcon3').css('display', 'block');
+		$('.bankcon4').css('display', 'none');
+		$('.bankcon5').css('display', 'none');
+		$('.xgtu1').css('display', 'none');
+		$('.xgtu2').css('display', 'none');
+		$('.xgtu3').css('display', 'block');
+		$('.xgtu4').css('display', 'none');
+		$('.xgtu5').css('display', 'none');
+        $(this).addClass('selected');
+        $('.checkbox',parent).attr('checked', true);
+    });
+	$(".cb-enable4").click(function(){
+        var parent = $(this).parents('.onoff');
+		$('.cb-enable1',parent).removeClass('selected');
+		$('.cb-enable3',parent).removeClass('selected');
+		$('.cb-enable2',parent).removeClass('selected');
+		$('.cb-enable5',parent).removeClass('selected');
+		$('.bankcon1').css('display', 'none');
+		$('.bankcon2').css('display', 'none');
+		$('.bankcon3').css('display', 'none');
+		$('.bankcon4').css('display', 'block');
+		$('.bankcon5').css('display', 'none');
+		$('.xgtu1').css('display', 'none');
+		$('.xgtu2').css('display', 'none');
+		$('.xgtu3').css('display', 'none');
+		$('.xgtu4').css('display', 'block');
+		$('.xgtu5').css('display', 'none');
+        $(this).addClass('selected');
+        $('.checkbox',parent).attr('checked', true);
+    });
+	$(".cb-enable5").click(function(){
+        var parent = $(this).parents('.onoff');
+		$('.cb-enable1',parent).removeClass('selected');
+		$('.cb-enable3',parent).removeClass('selected');
+		$('.cb-enable4',parent).removeClass('selected');
+		$('.cb-enable2',parent).removeClass('selected');
+		$('.bankcon1').css('display', 'none');
+		$('.bankcon2').css('display', 'none');
+		$('.bankcon3').css('display', 'none');
+		$('.bankcon4').css('display', 'none');
+		$('.bankcon5').css('display', 'block');
+		$('.xgtu1').css('display', 'none');
+		$('.xgtu2').css('display', 'none');
+		$('.xgtu3').css('display', 'none');
+		$('.xgtu4').css('display', 'none');
+		$('.xgtu5').css('display', 'block');
+        $(this).addClass('selected');
+        $('.checkbox',parent).attr('checked', true);
+    });
+    });
+	// 判断输入框是否为空
+    function checkForm(){
+        layer_loading('正在处理');
+        $('#post_form').submit();
+    }
+	function img_call_back(fileurl_tmp)
+    {
+        $("#wechat_logo_local").val(fileurl_tmp);
+        $("#img_a_local").attr('href', fileurl_tmp);
+        $("#img_i_local").attr('onmouseover', "layer_tips=layer.tips('<img src="+fileurl_tmp+" class=\\'layer_tips_img\\'>',this,{tips: [1, '#fff']});");
+    }
+	function img_call_public(fileurl_tmp)
+    {
+        $("#public_logo_local").val(fileurl_tmp);
+        $(".div_public_logo_local #img_a_local").attr('href', fileurl_tmp);
+        $(".div_public_logo_local #img_i_local").attr('onmouseover', "layer_tips=layer.tips('<img src="+fileurl_tmp+" class=\\'layer_tips_img\\'>',this,{tips: [1, '#fff']});");
+    }
+	function img_call_publicyi(fileurl_tmp)
+    {
+        $("#publicyi_logo_local").val(fileurl_tmp);
+        $(".div_publicyi_logo_local #img_a_local").attr('href', fileurl_tmp);
+        $(".div_publicyi_logo_local #img_i_local").attr('onmouseover', "layer_tips=layer.tips('<img src="+fileurl_tmp+" class=\\'layer_tips_img\\'>',this,{tips: [1, '#fff']});");
+    }
+	function img_call_publicyq(fileurl_tmp)
+    {
+        $("#publicyq_logo_local").val(fileurl_tmp);
+        $(".div_publicyq_logo_local #img_a_local").attr('href', fileurl_tmp);
+        $(".div_publicyq_logo_local #img_i_local").attr('onmouseover', "layer_tips=layer.tips('<img src="+fileurl_tmp+" class=\\'layer_tips_img\\'>',this,{tips: [1, '#fff']});");
+    }
+	function img_call_publicyw(fileurl_tmp)
+    {
+        $("#publicyw_logo_local").val(fileurl_tmp);
+        $(".div_publicyw_logo_local #img_a_local").attr('href', fileurl_tmp);
+        $(".div_publicyw_logo_local #img_i_local").attr('onmouseover', "layer_tips=layer.tips('<img src="+fileurl_tmp+" class=\\'layer_tips_img\\'>',this,{tips: [1, '#fff']});");
+    }
+	function img_call_publicywe(fileurl_tmp)
+    {
+        $("#publicywe_logo_local").val(fileurl_tmp);
+        $(".div_publicywe_logo_local #img_a_local").attr('href', fileurl_tmp);
+        $(".div_publicywe_logo_local #img_i_local").attr('onmouseover', "layer_tips=layer.tips('<img src="+fileurl_tmp+" class=\\'layer_tips_img\\'>',this,{tips: [1, '#fff']});");
+    }
+	function img_call_publicyweq(fileurl_tmp)
+    {
+        $("#publicyweq_logo_local").val(fileurl_tmp);
+        $(".div_publicyweq_logo_local #img_a_local").attr('href', fileurl_tmp);
+        $(".div_publicyweq_logo_local #img_i_local").attr('onmouseover', "layer_tips=layer.tips('<img src="+fileurl_tmp+" class=\\'layer_tips_img\\'>',this,{tips: [1, '#fff']});");
+    }
+	function img_call_publicywett(fileurl_tmp)
+    {
+        $("#publicywett_logo_local").val(fileurl_tmp);
+        $(".div_publicywett_logo_local #img_a_local").attr('href', fileurl_tmp);
+        $(".div_publicywett_logo_local #img_i_local").attr('onmouseover', "layer_tips=layer.tips('<img src="+fileurl_tmp+" class=\\'layer_tips_img\\'>',this,{tips: [1, '#fff']});");
+    }
+</script>
+{include file="footer.htm" /}

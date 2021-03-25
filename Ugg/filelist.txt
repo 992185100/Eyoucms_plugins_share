@@ -1,0 +1,5 @@
+application/plugins/controller/Ugg.php
+application/plugins/logic/UggLogic.php
+application/plugins/model/Ugg.php
+template/plugins/ugg
+weapp/Ugg

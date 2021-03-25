@@ -1,0 +1,518 @@
+{eyou:switch name='$ugg.data.tag_wemnnqrr'}
+{eyou:case value='1'}<script src="__WEAPP_TEMPLATE__/style/js/jquery.min.js"></script>{/eyou:case}
+{eyou:case value='2'}{/eyou:case}
+{eyou:default /}<script src="__WEAPP_TEMPLATE__/style/js/jquery.min.js"></script>
+{/eyou:switch}
+{eyou:switch name='$ugg.data.tag_wemnnqrrqq'}
+{eyou:case value='1'}<script src="__WEAPP_TEMPLATE__/style/js/jquery.cookie.js"></script>{/eyou:case}
+{eyou:case value='2'}{/eyou:case}
+{eyou:default /}<script src="__WEAPP_TEMPLATE__/style/js/jquery.cookie.js"></script>
+{/eyou:switch}
+<!-- 折角广告 start -->
+{eyou:if condition='($ugg.data.tag_weapl == 1)'}
+{eyou:switch name='$ugg.data.tag_weapfv'}
+{eyou:case value='1'}{/eyou:case}
+{eyou:case value='2'}{eyou:range name='$Request.controller' value='Index' type='notin'}<style>.fe-root {display: none!important;}</style>{/eyou:range}{/eyou:case}
+{eyou:default /}
+{/eyou:switch}
+<style>
+{eyou:switch name='$ugg.data.tag_weapazz'}
+{eyou:case value='1'}.fe-root {position: fixed!important;}{/eyou:case}
+{eyou:case value='2'}{/eyou:case}
+{eyou:default /}.fe-root {position: fixed!important;}
+{/eyou:switch}
+{eyou:switch name='$ugg.data.tag_weapaz'}
+{eyou:case value='1'}
+.fe-root {left: 0;}
+.fe-root .fold-effect, .fe-root .fold-effect .fe-bg {left: 0;}
+.fe-root .fold-effect .fe-fg {left: 0;}
+.fe-root .fold-effect .fe-fg .img {left: 0;}
+.fe-root .fold-effect:hover .close-btn {left: 80%;}
+.fe-root .fold-effect .close-btn {left: 35%;}
+.fe-root .fold-effect:hover .fe-bg {-webkit-clip-path: polygon(0 0,100% 0,0 100%);clip-path: polygon(0 0,100% 0,0 100%);}
+.fe-root .fold-effect .fe-bg {z-index: 1;background: transparent;-webkit-transition: .3s linear;transition: .3s linear;-webkit-clip-path: polygon(0 0,55% 0,0 55%);clip-path: polygon(0 0,55% 0,0 55%);}
+{/eyou:case}
+{eyou:case value='2'}
+.fe-root {right: 0!important;}
+.fe-root .fold-effect, .fe-root .fold-effect .fe-bg {right: 0!important;}
+.fe-root .fold-effect .fe-fg {right: 0!important;}
+.fe-root .fold-effect .fe-fg .img {right: 0!important;}
+.fe-root .fold-effect:hover .close-btn {right: 80%!important;}
+.fe-root .fold-effect .close-btn {right: 35%;}
+.fe-root .fold-effect:hover .fe-bg {-webkit-clip-path: polygon(100% 0,100% 100%,0 0);clip-path: polygon(100% 0,100% 100%,0 0);}
+.fe-root .fold-effect .fe-bg {z-index: 1;background: transparent;-webkit-transition: .3s linear;transition: .3s linear;-webkit-clip-path: polygon(100% 0, 100% 55%, 45% 0);clip-path: polygon(100% 0, 100% 55%, 45% 0);}
+{/eyou:case}
+{eyou:default /}
+.fe-root {left: 0;}
+.fe-root .fold-effect, .fe-root .fold-effect .fe-bg {left: 0;}
+.fe-root .fold-effect .fe-fg {left: 0;}
+.fe-root .fold-effect .fe-fg .img {left: 0;}
+.fe-root .fold-effect:hover .close-btn {left: 80%;}
+.fe-root .fold-effect .close-btn {left: 35%;}
+.fe-root .fold-effect:hover .fe-bg {-webkit-clip-path: polygon(0 0,100% 0,0 100%);clip-path: polygon(0 0,100% 0,0 100%);}
+.fe-root .fold-effect .fe-bg {z-index: 1;background: transparent;-webkit-transition: .3s linear;transition: .3s linear;-webkit-clip-path: polygon(0 0,55% 0,0 55%);clip-path: polygon(0 0,55% 0,0 55%);}
+{/eyou:switch}
+.fe-root {z-index: 1000;overflow: hidden;position: absolute;top: 0;width:{$ugg.data.toper_width|default='200'}px;height: {$ugg.data.toper_heigh|default='200'}px;}
+.fe-root .fold-effect, .fe-root .fold-effect .fe-bg {position: absolute;top: 0;width: 100%;height: 100%;}
+.fe-root .fold-effect {cursor: pointer;}
+.fe-root {display: none;}
+.fe-root .fold-effect .fe-bg .img {height: 100%;width: 100%;border: none;-o-object-fit: cover;object-fit: cover;}
+.fe-root .fold-effect .fe-fg {display: block;width: 100%;height: 100%;position: absolute;top: 0;z-index: 3;}
+.fe-root .fold-effect .fe-fg .img {top: 0;width: 55%;height: 55%;border: none;-o-object-fit: cover;object-fit: cover;z-index: 4;}
+.fe-root .fold-effect .close-btn, .fe-root .fold-effect .fe-fg .img {position: absolute;-webkit-transition: .3s linear;transition: .3s linear;}
+.fe-root .fold-effect .close-btn {top: 35%;z-index: 5;display: block;width: 10px;height: 10px;background: url(__WEAPP_TEMPLATE__/style/image/close.png) no-repeat 50%;}
+.fe-root .fold-effect:hover .close-btn {top: 80%;}
+.fe-root .fold-effect:hover .fe-fg .img {width: 100%;height: 100%;}
+</style>
+{eyou:switch name='$ugg.data.tag_weapa'}
+{eyou:case value='1'}
+<script>
+$(function(){
+	if($.cookie("isClose1") != 'yes'){
+	$(".fe-root").show();
+		$(".fe-root .close-gb").click(function(){
+			$.cookie("isClose1",'yes',{ expires:1});	//测试十秒		一天
+		});
+	}
+});
+</script>
+{/eyou:case}
+{eyou:case value='2'}{/eyou:case}
+{eyou:default /}
+<script>
+$(function(){
+	if($.cookie("isClose1") != 'yes'){
+			$(".fe-root").show();
+		$(".fe-root .close-gb").click(function(){
+			$.cookie("isClose1",'yes',{ expires:1});	//测试十秒		一天
+		});
+	}
+});
+</script>
+{/eyou:switch}
+<script>
+$(function(){
+		$(".fe-root .close-btn").click(function(){
+			$(".fe-root").fadeOut(500);
+		});
+});
+</script>
+<div class="fe-root">
+    <div class="fold-effect">
+	    {eyou:switch name='$ugg.data.tag_weapaz'}
+	    {eyou:case value='1'}<div class="fe-bg"><img class="img" src="{$ugg.data.wechat_logo_local|default='__WEAPP_TEMPLATE__/style/images/tu1.png'}"></div>{/eyou:case}
+		{eyou:case value='2'}<div class="fe-bg"><img class="img" src="{$ugg.data.public_logo_local|default='__WEAPP_TEMPLATE__/style/images/tu2.png'}"></div>{/eyou:case}
+		{eyou:default /}<div class="fe-bg"><img class="img" src="{$ugg.data.wechat_logo_local|default='__WEAPP_TEMPLATE__/style/images/tu1.png'}"></div>
+        {/eyou:switch}
+		<a class="fe-fg ibaotu-md-click" target="_blank" href="{$ugg.data.toper_dizhi|default='https://www.xxx.com'}">
+		    {eyou:switch name='$ugg.data.tag_weapaz'}
+		    {eyou:case value='1'}<img class="img" src="__WEAPP_TEMPLATE__/style/image/fg.png">{/eyou:case}
+			{eyou:case value='2'}<img class="img" src="__WEAPP_TEMPLATE__/style/image/fgf.png">{/eyou:case}
+			{eyou:default /}<img class="img" src="__WEAPP_TEMPLATE__/style/image/fg.png">
+            {/eyou:switch}
+		</a>
+		{eyou:switch name='$ugg.data.tag_weapa'}
+		{eyou:case value='1'}<a class="close-btn close-gb" title="关闭" href="javascript:;"></a>{/eyou:case}
+		{eyou:case value='2'}<a class="close-btn" title="关闭" href="javascript:;"></a>{/eyou:case}
+		{eyou:default /}<a class="close-btn close-gb" title="关闭" href="javascript:;"></a>
+		{/eyou:switch}
+	</div>
+</div>
+{eyou:else /}
+{/eyou:if}
+<!-- 折角广告 end -->
+<!-- 对联广告 start -->
+{eyou:if condition='($ugg.data.tag_weapzp == 1)'}
+{eyou:switch name='$ugg.data.tag_weapfz'}
+{eyou:case value='1'}{/eyou:case}
+{eyou:case value='2'}{eyou:range name='$Request.controller' value='Index' type='notin'}<style>.nationalRed-left{display: none!important;}.nationalRed-right{display: none!important;}</style>{/eyou:range}{/eyou:case}
+{eyou:default /}
+{/eyou:switch}
+<style>
+.nationalRed-left {position: fixed;left: {$ugg.data.topyi_heighh|default='20'}px;bottom: {$ugg.data.topyi_heigh|default='50'}px;z-index: 10;}
+.nationalRed-left .md-click {display: block;background-position: center;background-repeat: no-repeat;background-size: cover;}
+.nationalRed-left .md-click {width: {$ugg.data.topyi_heighaa|default='160'}px;height: {$ugg.data.topyi_heighzz|default='160'}px;background-image: url({$ugg.data.publicyi_logo_local|default='__WEAPP_TEMPLATE__/style/images/dk1.png'});}
+.nationalRed-left .icoclose {display: block;width: 15px;height: 15px;position: absolute;top: -15px;right: 10px;text-align: center;line-height: 13px;color: #666;cursor: pointer;}
+.nationalRed-right {position: fixed;right: {$ugg.data.rightyi_spaceh|default='20'}px;bottom: {$ugg.data.rightyi_space|default='50'}px;z-index: 10;}
+.nationalRed-right .md-click {display: block;background-position: center;background-repeat: no-repeat;background-size: cover;}
+.nationalRed-right .md-click {width: {$ugg.data.topyi_heighaaz|default='160'}px;height: {$ugg.data.topyi_heighzza|default='160'}px;background-image: url({$ugg.data.publicyq_logo_local|default='__WEAPP_TEMPLATE__/style/images/dk1.png'});}
+.nationalRed-right .icoclose {display: block;width: 15px;height: 15px;position: absolute;top: -15px;left: 10px;text-align: center;line-height: 13px;color: #666;cursor: pointer;}
+.nationalRed-right .icoclose ,.nationalRed-left .icoclose {background: url(__WEAPP_TEMPLATE__/style/image/close.png) no-repeat 50%;}
+.nationalRed-left{display: none;}.nationalRed-right{display: none;}
+</style>
+{eyou:switch name='$ugg.data.tag_weapaa'}
+{eyou:case value='1'}
+<script>
+$(function(){
+	if($.cookie("isClose2") != 'yes'){
+	$(".nationalRed-left").show();
+		$(".nationalRed-left .close-butt").click(function(){
+			$.cookie("isClose2",'yes',{ expires:1});	//测试十秒		一天
+		});
+	}
+});
+</script>
+<script>
+$(function(){
+	if($.cookie("isClose3") != 'yes'){
+	$(".nationalRed-right").show();
+		$(".nationalRed-right .close-butt").click(function(){
+			$.cookie("isClose3",'yes',{ expires:1});	//测试十秒		一天
+		});
+	}
+});
+</script>
+{/eyou:case}
+{eyou:case value='2'}{/eyou:case}
+{eyou:default /}
+<script>
+$(function(){
+	if($.cookie("isClose2") != 'yes'){
+	$(".nationalRed-left").show();
+		$(".nationalRed-left .close-butt").click(function(){
+			$.cookie("isClose2",'yes',{ expires:1});	//测试十秒		一天
+		});
+	}
+});
+</script>
+<script>
+$(function(){
+	if($.cookie("isClose3") != 'yes'){
+	$(".nationalRed-right").show();
+		$(".nationalRed-right .close-butt").click(function(){
+			$.cookie("isClose3",'yes',{ expires:1});	//测试十秒		一天
+		});
+	}
+});
+</script>
+{/eyou:switch}
+<script>
+$(function(){
+		$(".nationalRed-left .icoclose").click(function(){
+			$(".nationalRed-left").fadeOut(500);
+		});
+		$(".nationalRed-right .icoclose").click(function(){
+			$(".nationalRed-right").fadeOut(500);
+		});
+});
+</script>
+<div class="nationalRed-left" style="">
+  <a href="{$ugg.data.topyi_heighhdd|default='https://www.xxx.com'}" target="_blank" class="md-click"></a>
+  {eyou:switch name='$ugg.data.tag_weapaa'}
+  {eyou:case value='1'}<a class="icoclose close-butt"></a>{/eyou:case}
+  {eyou:case value='2'}<a class="icoclose"></a>{/eyou:case}
+  {eyou:default /}<a class="icoclose close-butt"></a>
+  {/eyou:switch}
+</div>
+<div class="nationalRed-right" style="">
+  <a href="{$ugg.data.rightyi_spacehdz|default='https://www.xxx.com'}" target="_blank" class="md-click"></a>
+  {eyou:switch name='$ugg.data.tag_weapaa'}
+  {eyou:case value='1'}<a class="icoclose close-butt"></a>{/eyou:case}
+  {eyou:case value='2'}<a class="icoclose"></a>{/eyou:case}
+  {eyou:default /}<a class="icoclose close-butt"></a>
+  {/eyou:switch}
+</div>
+<!-- 对联广告 end -->
+{eyou:else /}
+{/eyou:if}
+<!-- 弹出广告 start -->
+{eyou:if condition='($ugg.data.tag_weappp == 1)'}
+{eyou:switch name='$ugg.data.tag_weapfc'}
+{eyou:case value='1'}{/eyou:case}
+{eyou:case value='2'}{eyou:range name='$Request.controller' value='Index' type='notin'}<style>.home-botto {display: none!important;}</style>{/eyou:range}{/eyou:case}
+{eyou:default /}
+{/eyou:switch}
+<style>
+.home-botto {height: {$ugg.data.rxy_consult|default='500px'};width: {$ugg.data.rxy_consultq|default='100%'};position: fixed;z-index: 20;bottom: {$ugg.data.rxy_consultw|default='0'};left: 0;right: 0;margin: auto;}
+.home-botto a {background-image: url({$ugg.data.publicyw_logo_local|default='__WEAPP_TEMPLATE__/style/images/da1.png'});background-repeat: no-repeat;background-position: center;background-size: auto 100%;height: {$ugg.data.rxy_consult|default='500px'};width:{$ugg.data.rxy_consultq|default='100%'};position: fixed;bottom: {$ugg.data.rxy_consultw|default='0'};margin: auto;z-index: 21;right: 0;left: 0;}
+.home-botto .close-bully {display: block;position: absolute;top: 8%;right: 3%;cursor: pointer;width: 38px;height: 38px;background: url(__WEAPP_TEMPLATE__/style/image/img_close.png) center no-repeat;background-size: cover;z-index: 200;}
+.home-botto {display: none;}
+</style>
+{eyou:switch name='$ugg.data.tag_weapas'}
+{eyou:case value='1'}
+<script>
+$(function(){
+	if($.cookie("isClose4") != 'yes'){
+	$(".home-botto").show();
+		$(".home-botto .pop-close").click(function(){
+			$.cookie("isClose4",'yes',{ expires:1});	//测试十秒		一天
+		});
+	}
+});
+</script>
+{/eyou:case}
+{eyou:case value='2'}{/eyou:case}
+{eyou:default /}
+<script>
+$(function(){
+	if($.cookie("isClose4") != 'yes'){
+	$(".home-botto").show();
+		$(".home-botto .pop-close").click(function(){
+			$.cookie("isClose4",'yes',{ expires:1});	//测试十秒		一天
+		});
+	}
+});
+</script>
+{/eyou:switch}
+<script>
+$(function(){
+	$(".home-botto .close-bully").click(function(){
+		$(".home-botto").fadeOut(500);
+	});
+});
+</script>
+<div class="home-botto">
+<a href="{$ugg.data.rxy_consulte|default='https://www.xxx.com/'}" target="_blank" style=""></a>
+{eyou:switch name='$ugg.data.tag_weapas'}
+{eyou:case value='1'}<i class="pop-close close-bully"></i>{/eyou:case}
+{eyou:case value='2'}<i class="close-bully"></i>{/eyou:case}
+{eyou:default /}<i class="pop-close close-bully"></i>
+{/eyou:switch}
+</div>
+{eyou:else /}
+{/eyou:if}
+<!-- 弹出广告 end -->
+<!-- xuanfu广告 start -->
+{eyou:if condition='($ugg.data.tag_weapppp == 1)'}
+{eyou:switch name='$ugg.data.tag_weapfb'}
+{eyou:case value='1'}{/eyou:case}
+{eyou:case value='2'}{eyou:range name='$Request.controller' value='Index' type='notin'}<style>.mask {display: none!important;}</style>{/eyou:range}{/eyou:case}
+{eyou:default /}
+{/eyou:switch}
+<style>
+{eyou:switch name='$ugg.data.tag_weapadff'}
+{eyou:case value='1'}
+.closeee{background: url("__WEAPP_TEMPLATE__/style/image/closesanjiao.png")  no-repeat center center;}
+.mask .closeee {position: absolute;top: 0;left: 20px;margin-left: 0px;width: 40px;height: 100%;cursor: pointer;}
+.clickarea{position: absolute;top: 0;left: 200px;margin-left: 0px;width: 100%;height: 100%;cursor: pointer;}
+.thumbnail {position: fixed;right: {$ugg.data.rxy_consultezzb|default='0'};bottom: {$ugg.data.rxy_consultezzx|default='0'};width: {$ugg.data.rxy_consultezzc|default='184px'};height: {$ugg.data.rxy_consultezzv|default='124px'};cursor: pointer;}
+.mask {position: fixed;bottom: {$ugg.data.rxy_consultezzx|default='0'};left:100%;width: {$ugg.data.rxy_consultezzm|default='100%'};height: {$ugg.data.rxy_consultezzn|default='128px'};background: url("{$ugg.data.publicywe_logo_local|default='__WEAPP_TEMPLATE__/style/images/ls.jpg'}")  no-repeat scroll center;z-index: 1001;}
+{/eyou:case}
+{eyou:case value='2'}
+.closeee{background: url("__WEAPP_TEMPLATE__/style/image/closesanjiao1.png")  no-repeat center center;}
+.mask .closeee {position: absolute;top: 0;right: 20px;margin-left: 0px;width: 40px;height: 100%;cursor: pointer;}
+.clickarea{position: absolute;top: 0;right: 200px;margin-right: 0px;width: 100%;height: 100%;cursor: pointer;}
+.thumbnail {position: fixed;left: {$ugg.data.rxy_consultezzb|default='0'};bottom: {$ugg.data.rxy_consultezzx|default='0'};width: {$ugg.data.rxy_consultezzc|default='184px'};height: {$ugg.data.rxy_consultezzv|default='124px'};cursor: pointer;}
+.mask {position: fixed;bottom: {$ugg.data.rxy_consultezzx|default='0'};right:100%;width: {$ugg.data.rxy_consultezzm|default='100%'};height: {$ugg.data.rxy_consultezzn|default='128px'};background: url("{$ugg.data.publicywe_logo_local|default='__WEAPP_TEMPLATE__/style/images/ls.jpg'}")  no-repeat scroll center;z-index: 1001;}
+{/eyou:case}
+{eyou:default /}
+.closeee{background: url("__WEAPP_TEMPLATE__/style/image/closesanjiao.png")  no-repeat center center;}
+.mask .closeee {position: absolute;top: 0;left: 20px;margin-left: 0px;width: 40px;height: 100%;cursor: pointer;}
+.clickarea{position: absolute;top: 0;left: 200px;margin-left: 0px;width: 100%;height: 100%;cursor: pointer;}
+.thumbnail {position: fixed;right: {$ugg.data.rxy_consultezzb|default='0'};bottom: {$ugg.data.rxy_consultezzx|default='0'};width: {$ugg.data.rxy_consultezzc|default='184px'};height: {$ugg.data.rxy_consultezzv|default='124px'};cursor: pointer;}
+.mask {position: fixed;bottom: {$ugg.data.rxy_consultezzx|default='0'};left:100%;width: {$ugg.data.rxy_consultezzm|default='100%'};height: {$ugg.data.rxy_consultezzn|default='128px'};background: url("{$ugg.data.publicywe_logo_local|default='__WEAPP_TEMPLATE__/style/images/ls.jpg'}")  no-repeat scroll center;z-index: 1001;}
+{/eyou:switch}
+@-webkit-keyframes rotate {from {-webkit-transform:rotate(0deg);}to {-webkit-transform:rotate(360deg);}}
+.mask {display: none;}
+</style>
+{eyou:switch name='$ugg.data.tag_weapad'}
+{eyou:case value='1'}
+<script>
+$(function(){
+	if($.cookie("isClose5") != 'yes'){
+	$(".mask").show();
+		$(".closeee").click(function(){
+			$.cookie("isClose5",'yes',{ expires:1});	//测试十秒		一天
+		});
+	}
+});
+</script>
+{/eyou:case}
+{eyou:case value='2'}{/eyou:case}
+{eyou:default /}
+<script>
+$(function(){
+	if($.cookie("isClose5") != 'yes'){
+	$(".mask").css("left", "100%");
+		$(".closeee").click(function(){
+			$.cookie("isClose5",'yes',{ expires:1});	//测试十秒		一天
+		});
+	}
+});
+</script>
+{/eyou:switch}
+<div class="mask">
+    <span class="closeee"></span>
+    <a href="{$ugg.data.rxy_consultezz|default='https://www.xxx.com/'}" target="_blank"><span class="clickarea"></span></a>
+     <div class="thumbnail">
+      	<img src="{$ugg.data.publicyweq_logo_local|default='__WEAPP_TEMPLATE__/style/images/ss.png'}">
+     </div>
+</div>
+{eyou:switch name='$ugg.data.tag_weapadff'}
+{eyou:case value='1'}
+<script>
+setTimeout(function(){
+	$('.thumbnail').trigger('click')
+},1000)
+// 底部广告栏的收起与展开
+$('.thumbnail').on("click", function () {
+	$(this).animate({"right": -146},400,function () {
+		$(this).hide();
+		$('.mask').animate({"left": 0}, 600);
+	});
+});
+$('.closeee').on("click", function () {
+	//var thumbWidth = $('.thumbnail').width();
+	$('.mask').animate({
+		"left": "100%"
+		}, 600, function() {
+		$('.thumbnail').show().animate({"right": 0},400);
+	});
+});
+</script>
+{/eyou:case}
+{eyou:case value='2'}
+<script>
+setTimeout(function(){
+	$('.thumbnail').trigger('click')
+},1000)
+// 底部广告栏的收起与展开
+$('.thumbnail').on("click", function () {
+	$(this).animate({"left": -146},400,function () {
+		$(this).hide();
+		$('.mask').animate({"right": 0}, 600);
+	});
+});
+$('.closeee').on("click", function () {
+	//var thumbWidth = $('.thumbnail').width();
+	$('.mask').animate({
+		"right": "100%"
+		}, 600, function() {
+		$('.thumbnail').show().animate({"left": 0},400);
+	});
+});
+</script>
+{/eyou:case}
+{eyou:default /}
+<script>
+setTimeout(function(){
+	$('.thumbnail').trigger('click')
+},1000)
+// 底部广告栏的收起与展开
+$('.thumbnail').on("click", function () {
+	$(this).animate({"right": -146},400,function () {
+		$(this).hide();
+		$('.mask').animate({"left": 0}, 600);
+	});
+});
+$('.closeee').on("click", function () {
+	//var thumbWidth = $('.thumbnail').width();
+	$('.mask').animate({
+		"left": "100%"
+		}, 600, function() {
+		$('.thumbnail').show().animate({"right": 0},400);
+	});
+});
+</script>
+{/eyou:switch}
+{eyou:else /}
+{/eyou:if}
+<!-- xuanfu广告 end -->
+<!-- 滚动广告 start -->
+{eyou:if condition='($ugg.data.tag_weappq == 1)'}
+{eyou:switch name='$ugg.data.tag_weapfm'}
+{eyou:case value='1'}{/eyou:case}
+{eyou:case value='2'}{eyou:range name='$Request.controller' value='Index' type='notin'}<style>.conent {display: none!important;}</style>{/eyou:range}{/eyou:case}
+{eyou:default /}
+{/eyou:switch}
+<style type="text/css">
+.conent{z-index: 991001;position:absolute;top:20px;}
+.conent .sition{position:relative;}
+.conent .sition .c_header{width:{$ugg.data.zxhyffll_spaceq|default='210'}px;text-align:center;cursor: pointer;}
+.conent .sition .c_header .txt{color: #adadad;;font-weight:600;font-size:15px;float: right;}
+.conent .sition .c_adver{cursor:pointer;}
+.conent .sition .c_adver a {width: {$ugg.data.zxhyffll_spaceq|default='210'}px;height: {$ugg.data.zxhyffll_spaceqq|default='70'}px;cursor: pointer;}
+.conent .sition .c_adver a img {width: {$ugg.data.zxhyffll_spaceq|default='210'}px;height: {$ugg.data.zxhyffll_spaceqq|default='70'}px;}
+.conent {display: none;}
+</style>
+<div class="conent">
+	<div class="sition">
+		<div class="c_header c_guanbi"><strong class="txt">X</strong></div>
+		<div class="c_adver"><a href="{$ugg.data.zxhyffll_spaceqqq|default='https://www.xxx.com/'}" target="_blank"><img src="{$ugg.data.publicywett_logo_local|default='__WEAPP_TEMPLATE__/style/images/kejian.jpg'}" border="0" width="214" height="73"></a></div>
+	</div>
+</div>
+<script type="text/javascript">
+{eyou:switch name='$ugg.data.tag_weapaf'}
+{eyou:case value='1'}
+$(function(){
+	if($.cookie("isClose6") != 'yes'){
+	$(".conent").show();
+		$(".conent .c_guanbi").click(function(){
+			$.cookie("isClose6",'yes',{ expires:1});	//测试十秒		一天
+		});
+	}
+});
+{/eyou:case}
+{eyou:case value='2'}{/eyou:case}
+{eyou:default /}
+$(function(){
+	if($.cookie("isClose6") != 'yes'){
+	$(".conent").show();
+		$(".conent .c_guanbi").click(function(){
+			$.cookie("isClose6",'yes',{ expires:1});	//测试十秒		一天
+		});
+	}
+});
+{/eyou:switch}
+	$(function(){
+		var timer=null;/*定时器*/
+		var _left=0;/*默认left距离*/
+		var _top=20;/*默认top距离*/
+		var top_folg=false;/*控制高度-锁*/
+		var left_folg=true;/*控制宽度-锁*/
+		var win_width=$(window).width()-$(".conent").width();/*获取并计算浏览器初始宽度*/
+		var win_height=$(window).height()-$(".conent").height();/*获取并计算浏览器初始高度*/
+		$("#liulan").html(win_height+"px");
+		$("#sumwid").html(win_width+"px");;
+		action();/*执行走动*/
+		$(".conent").mouseover(function(){
+			clearInterval(timer);
+
+		}).mouseout(function(){
+			action();
+		});
+
+		$(window).resize(function(){
+			conobj=$(".conent");
+			win_width=$(window).width()-conobj.width();
+			win_height=$(window).height()-conobj.height();
+			$("#liulan").html(win_height+"px");
+			$("#sumwid").html(win_width+"px");;
+		});
+
+		function action(){
+			timer=setInterval(function(){
+				if(!top_folg){
+					_top++;
+					if(_top>=win_height){top_folg=true;};
+				}else{
+					_top--;
+					if(_top<=0){top_folg=false;};
+				};
+				if(left_folg){
+					 _left++;
+					if(_left>=win_width){left_folg=false;};
+				}else{
+					_left--;
+					if(_left<=0){left_folg=true;};
+				};
+                $("#textone").html(_top+"px");
+				$("#timewid").html(_left+"px");
+				$(".conent").animate({
+					left:_left,
+					top:_top
+				},3);
+			},15);
+		};
+
+		$(".conent .c_header").click(function(){
+			$(this).parents(".conent").slideUp(500,function(){
+				$(this).remove();
+				clearInterval(timer);
+			});
+		});
+	});
+</script>
+{eyou:else /}
+{/eyou:if}
+<!-- 滚动广告 end -->

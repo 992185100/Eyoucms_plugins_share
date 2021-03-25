@@ -1,0 +1,20 @@
+/* 主要css样式*/
+.onoff .cb-enable1 {border-width: 1px 0 1px 1px;}
+.onoff .cb-enable1 {color: #777;font-size: 12px;line-height: 20px;background-color: #f8f8f8;height: 20px;padding: 1px 9px;border-style: solid;border-color: #ddd;border-radius: 4px 0 0 4px;}
+.onoff .cb-enable1.selected {color: #FFF;background-color: #5FB878;border-color: #5FB878;border-radius: 4px 0 0 4px;}
+.onoff .cb-enable2 {border-width: 1px 0 1px 1px;}
+.onoff .cb-enable2 {color: #777;font-size: 12px;line-height: 20px;background-color: #f8f8f8;height: 20px;padding: 1px 9px;border-style: solid;border-color: #ddd;}
+.onoff .cb-enable2.selected {color: #FFF;background-color: #5FB878;border-color: #5FB878;}
+
+.onoff .cb-enable3 {border-width: 1px 0 1px 1px;}
+.onoff .cb-enable3 {color: #777;font-size: 12px;line-height: 20px;background-color: #f8f8f8;height: 20px;padding: 1px 9px;border-style: solid;border-color: #ddd;}
+.onoff .cb-enable3.selected {color: #FFF;background-color: #5FB878;border-color: #5FB878;}
+
+.onoff .cb-enable4 {border-width: 1px 0 1px 1px;}
+.onoff .cb-enable4 {color: #777;font-size: 12px;line-height: 20px;background-color: #f8f8f8;height: 20px;padding: 1px 9px;border-style: solid;border-color: #ddd;}
+.onoff .cb-enable4.selected {color: #FFF;background-color: #5FB878;border-color: #5FB878;}
+.onoff .cb-enable5 {border-width: 1px 1px 1px 1px;}
+.onoff .cb-enable5 {color: #777;font-size: 12px;line-height: 20px;background-color: #f8f8f8;height: 20px;padding: 1px 9px;border-style: solid;border-color: #ddd;border-radius: 0 4px 4px 0;}
+.onoff .cb-enable5.selected {color: #FFF;background-color: #5FB878;border-color: #5FB878;}
+
+.none {display: none;}
