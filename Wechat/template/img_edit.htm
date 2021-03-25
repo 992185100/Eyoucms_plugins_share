@@ -1,0 +1,202 @@
+{include file="header.htm" /}
+<body style="background-color: #FFF; overflow: auto;">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    {include file="bar.htm" /}
+    <form class="form-horizontal" id="post_form" action="{:weapp_url('Wechat/Keyword/img_edit')}" method="post" enctype="multipart/form-data">
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label for="text">站内文档</label>
+                </dt>
+                <dd class="opt">
+                    <a onclick="select_archives('{:weapp_url('Wechat/Keyword/news_select_archives')}');" class="ncap-btn"><i class="fa fa-search"></i>选择</a>
+                    <a onclick="window.location.reload();" class="ncap-btn"><i class="fa fa-cancel"></i>取消</a>
+                    <p class="notic"></p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="title"><em>*</em>公众号</label>
+                </dt>
+                <dd class="opt"> 
+                    <select name="token" id="token">
+                        {volist name="wechat_list" id="vo"}
+                        <option value="{$vo.token}" {eq name="$field.token" value="$vo.token"}selected{/eq}>{$vo.wxname}</option>
+                        {/volist}
+                    </select>
+                    <span class="err"></span>
+                    <p class="notic"></p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="url"><em>*</em>关键字</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="keyword" value="{$field.keyword}" id="keyword" class="input-txt">
+                    <span class="err"></span>
+                    <p class="notic"></p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="url"><em>*</em>标题</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="title" value="{$field.title}" id="title" class="input-txt">
+                    <span class="err"></span>
+                    <p class="notic"></p>
+                </dd>
+            </dl>
+            <dl class="row {gt name='$field.aid' value='0'}none{/gt}" id="dl_url">
+                <dt class="tit">
+                    <label for="url"><em>*</em>URL链接</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="url" placeholder="http://" id="url" value="{$field.url}" class="input-txt">
+                    <span class="err"></span>
+                    <p class="notic"></p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="litpic_local"><em>*</em>上传封面图</label>
+                </dt>
+                <dd class="opt">
+                    <div class="input-file-show div_litpic_local">
+                        <span class="show">
+                            <a id="img_a" class="nyroModal" rel="gal" href="{$field.litpic|default='javascript:void(0);'}" target="_blank">
+                                <i id="img_i" class="fa fa-picture-o" {notempty name="$field.litpic"}onmouseover="layer_tips=layer.tips('<img src={$field.litpic} class=\'layer_tips_img\'>',this,{tips: [1, '#fff']});"{/notempty} onmouseout="layer.close(layer_tips);"></i>
+                            </a>
+                        </span>
+                        <span class="type-file-box">
+                            <input type="text" id="tmp_litpic" value="{$field.litpic}" class="type-file-text">
+                            <input type="button" name="button" id="button1" value="选择上传..." class="type-file-button">
+                            <input class="type-file-file" type="file" name="litpic_local" id="litpic_local" size="30" hidefocus="true" nc_type="change_site_logo" onchange="if($(this).val()){$('#tmp_litpic').val($(this).val());}">
+                        </span>
+                    </div>
+                    <input type="text" id="litpic_remote" name="litpic_remote" value="{$field.litpic_remote|default=''}" placeholder="http://" class="input-txt" style="display: none;">
+                    &nbsp;
+                    <label><input type="checkbox" name="is_remote" id="is_remote" value="1" onClick="clickRemote(this, 'litpic');">远程图片</label>
+                    <span class="err"></span>
+                    <p class="notic">建议尺寸 300 * 150 (像素) 的jpg/png等文件，大小不能超过微信官方规定的2MB</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="text"><em>*</em>摘要</label>
+                </dt>
+                <dd class="opt ui-text">
+                    <textarea rows="5" cols="80" id="intro" name="intro" style="height:80px;" placeholder="" class="ui-input" data-num="110">{$field.intro}</textarea>
+                    <p class="notic">（<span class="ui-textTips">还可以输入110个字</span>）</p>
+                </dd>
+            </dl>
+            <div class="bot">
+              <input type="hidden" value="{$field.id}" name="kid">
+              <input type="hidden" name="aid" id="aid" value="{$field.aid}" />
+              <input type="hidden" name="media_id" id="media_id" value="{$field.media_id}" />
+              <a href="JavaScript:void(0);" onclick="formSubmit();" class="ncap-btn-big ncap-btn-green" id="submitBtn">确认提交</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+
+  $(function(){
+      tipsText();
+  });
+  
+  $(document).ready(function(){
+      $("#post_form").validate({
+          debug: false, //调试模式取消submit的默认提交功能   
+          focusInvalid: false, //当为false时，验证无效时，没有焦点响应  
+          onkeyup: false,   
+          submitHandler: function(form){   //表单提交句柄,为一回调函数，带一个参数：form   
+              layer_loading('正在处理');
+              form.submit();   //提交表单   
+          },  
+          ignore:":button",   //不验证的元素
+          rules:{
+              token:{
+                  required:true
+              },
+              keyword:{
+                  required:true
+              },
+              title:{
+                  required:true
+              },
+              url:{
+                  required:true
+              },
+              litpic:{
+                  required:true
+              },
+              intro:{
+                  required:true
+              }
+          },
+          messages:{
+              token:{
+                  required:"请选择公众号"
+              },
+              keyword:{
+                  required:"关键字不能为空"
+              },
+              title:{
+                  required:"标题不能为空"
+              },
+              url:{
+                  required:"URL链接不能为空"
+              },
+              litpic:{
+                  required:"请上传封面图"
+              },
+              intro:{
+                  required:"简介不能为空"
+              }
+          }
+      });
+  });
+
+  function formSubmit(){
+      $("#post_form").submit();
+  }
+
+  function select_archives(url){
+      layer.open({
+          type: 2,
+          title: '选择站内文档',
+          shadeClose: false,
+          shade: 0.8,
+          area: ['750px', '80%'],
+          content: url, //iframe的url
+      });
+  }
+
+  function selected(obj, aid){
+    var title = $(obj).parent().find('#title_'+aid).val();
+    var litpic = $(obj).parent().find('#litpic_'+aid).val();
+    var arcurl = $(obj).parent().find('#arcurl_'+aid).val();
+    var intro = $(obj).parent().find('#seo_description_'+aid).val();
+    $('#aid').val(aid);
+    $('#title').val(title);
+    if (litpic.length > 0) {
+      $('.div_litpic_local').hide();
+      $('#is_remote').attr('checked', true);
+      $('#litpic_remote').val(litpic).show();
+    } else {
+      $('.div_litpic_local').show();
+      $('#is_remote').attr('checked', false);
+      $('#litpic_remote').val('').hide();
+    }
+    $('#url').val(arcurl);
+    $('#dl_url').hide();
+    $('#intro').val(intro);
+    layer.closeAll();
+  }
+</script>
+{include file="footer.htm" /}

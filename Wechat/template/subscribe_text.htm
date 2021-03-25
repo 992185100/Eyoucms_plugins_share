@@ -1,0 +1,121 @@
+{include file="header.htm" /}
+<body style="background-color: #FFF; overflow: auto;">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    {include file="bar.htm" /}
+    <form class="form-horizontal" id="post_form" action="{:weapp_url('Wechat/Subscribe/subscribe_text')}" method="post" enctype="multipart/form-data">
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label for="title"><em>*</em>公众号</label>
+                </dt>
+                <dd class="opt"> 
+                    <select name="token" id="token">
+                        <option value="">--请选择--</option>
+                        {volist name="wechat_list" id="vo"}
+                        <option value="{$vo.token}" {eq name="$field.token" value="$vo.token"}selected{/eq}>{$vo.wxname}</option>
+                        {/volist}
+                    </select>
+                    <span class="err"></span>
+                    <p class="notic"></p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="title"><em>*</em>回复类型</label>
+                </dt>
+                <dd class="opt"> 
+                    {volist name="keywordTypeList" id="vo"}
+                    {in name="$key" value="TEXT,PIC"}
+                    <label><input type="radio" name="type" value="{$key}" {eq name="$field.type" value="$key"}checked=true{/eq}> {$vo}</label>&nbsp;
+                    {/in}
+                    {/volist}
+                    <span class="err"></span>
+                    <p class="notic"></p>
+                </dd>
+            </dl>
+            <dl class="row {if condition="!empty($field.type) && 'TEXT' != $field.type"}none{/if}" id="dl_text">
+                <dt class="tit">
+                    <label for="text"><em>*</em>文本内容</label>
+                </dt>
+                <dd class="opt ui-text">
+                    <textarea rows="5" cols="80" id="text" name="text" style="height:200px;" placeholder="" class="ui-input" data-num="600">{$field.text|default=''}</textarea>
+                    <p class="notic">（<span class="ui-textTips">还可以输入600个字</span>）</p>
+                </dd>
+            </dl>
+            <dl class="row {if condition="empty($field.type) || 'PIC' != $field.type"}none{/if}" id="dl_pic">
+                <dt class="tit">
+                    <label><em>*</em>上传图片</label>
+                </dt>
+                <dd class="opt">
+                    <div class="input-file-show">
+                        <span class="show">
+                            <a id="img_a" class="nyroModal" rel="gal" href="javascript:void(0);">
+                                <i id="img_i" class="fa fa-picture-o"></i>
+                            </a>
+                        </span>
+                        <span class="type-file-box">
+                            <input type="text" id="tmp_litpic" value="{$field.litpic|default=''}" class="type-file-text">
+                            <input type="button" name="button" id="button1" value="选择上传..." class="type-file-button">
+                            <input class="type-file-file" type="file" name="litpic" id="litpic" size="30" hidefocus="true" nc_type="change_site_logo" onchange="if($(this).val()){$('#tmp_litpic').val($(this).val());}">
+                        </span>
+                    </div>
+                    <span class="err"></span>
+                    <p class="notic">图片大小不能超过微信官方规定的2MB</p>
+                </dd>
+            </dl>
+            <div class="bot">
+                <a href="JavaScript:void(0);" onclick="formSubmit();" class="ncap-btn-big ncap-btn-green" id="submitBtn">确认提交</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+
+    $(function(){
+        tipsText();
+
+        $('input[name=type]').click(function(){
+            var type = $(this).val();
+            if ('TEXT' == type) {
+                $('#dl_text').show();
+                $('#dl_pic').hide();
+            } else if ('PIC' == type) {
+                $('#dl_text').hide();
+                $('#dl_pic').show();
+            }
+        });
+    });
+  
+    // 判断输入框是否为空
+    function formSubmit(){
+        if($('#token').val() == ''){
+            showErrorMsg('请选择公众号！');
+            $('#token').focus();
+            return false;
+        }
+        if($('input[name=type]').is(':checked') == false){
+            showErrorMsg('请选择回复类型！');
+            $('input[name=type]').focus();
+            return false;
+        }
+        if ($('input[name=type]:checked').val() == 'TEXT') {
+            if($('textarea[name=text]').val() == ''){
+                showErrorMsg('文本内容不能为空！');
+                $('textarea[name=text]').focus();
+                return false;
+            }
+        } else if ($('input[name=type]:checked').val() == 'PIC') {
+            if($('#litpic').val() == ''){
+                showErrorMsg('请上传图片！');
+                $('#litpic').focus();
+                return false;
+            }
+        }
+        layer_loading('正在处理');
+        $('#post_form').submit();
+    }
+</script>
+{include file="footer.htm" /}

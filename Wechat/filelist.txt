@@ -1,0 +1,4 @@
+weapp/Wechat
+application/plugins/controller/Wechat.php
+application/plugins/logic/WechatBasisLogic.php
+application/plugins/util/WechatBasisUtil.php

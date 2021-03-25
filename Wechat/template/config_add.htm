@@ -1,0 +1,210 @@
+{include file="header.htm" /}
+<body style="background-color: #FFF; overflow: auto;">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    {include file="bar.htm" /}
+    <form class="form-horizontal" id="post_form" action="{:weapp_url('Wechat/Wechat/config_add')}" method="post">
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label for="title"><em>*</em>公众号名称</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="wxname" value="" id="wxname" class="input-txt">
+                    <span class="err"></span>
+                    <p class="notic">请登录微信公众平台查看</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="title"><em>*</em>微信号</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="weixin" value="" id="weixin" class="input-txt">
+                    <span class="err"></span>
+                    <p class="notic">请登录微信公众平台查看</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="title"><em>*</em>开发者ID(AppID)</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="appid" value="" id="appid" class="input-txt">
+                    <span class="err"></span>
+                    <p class="notic">请登录微信公众平台-【开发】-【基本配置】</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="title"><em>*</em>开发者密码(AppSecret)</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="appsecret" value="" id="appsecret" class="input-txt">
+                    <span class="err"></span>
+                    <p class="notic">请登录微信公众平台-【开发】-【基本配置】</p>
+                </dd>
+            </dl>
+            <dl class="row none">
+                <dt class="tit">
+                    <label for="headerpic_local">上传头像</label>
+                </dt>
+                <dd class="opt">
+                    <div class="input-file-show div_headerpic_local">
+                        <span class="show">
+                            <a id="img_a_headerpic" class="nyroModal" rel="gal" href="javascript:void(0);" target="_blank">
+                                <i id="img_i_headerpic" class="fa fa-picture-o" onmouseout="layer.close(layer_tips);"></i>
+                            </a>
+                        </span>
+                        <span class="type-file-box">
+                            <input type="text" id="headerpic_local" name="headerpic_local" value="" class="type-file-text">
+                            <input type="button" name="button" id="button1" value="选择上传..." class="type-file-button">
+                            <input class="type-file-file" onClick="GetUploadify(1,'','weapp','headerpic_img_call_back')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        </span>
+                    </div>
+                    <input type="text" id="headerpic_remote" name="headerpic_remote" value="" placeholder="http://" class="input-txt" style="display: none;">
+                    &nbsp;
+                    <label><input type="checkbox" name="headerpic_is_remote" id="headerpic_is_remote" value="1" onClick="clickRemote(this, 'headerpic');">远程图片</label>
+                    <span class="err"></span>
+                    <p class="notic">建议尺寸 200 * 200 (像素) 的jpg或gif文件</p>
+                </dd>
+            </dl>
+            <dl class="row none">
+                <dt class="tit">
+                    <label for="qr_local">上传二维码</label>
+                </dt>
+                <dd class="opt">
+                    <div class="input-file-show div_qr_local">
+                        <span class="show">
+                            <a id="img_a_qr" class="nyroModal" rel="gal" href="javascript:void(0);" target="_blank">
+                                <i id="img_i_qr" class="fa fa-picture-o" onmouseout="layer.close(layer_tips);"></i>
+                            </a>
+                        </span>
+                        <span class="type-file-box">
+                            <input type="text" id="qr_local" name="qr_local" value="" class="type-file-text">
+                            <input type="button" name="button" id="button1" value="选择上传..." class="type-file-button">
+                            <input class="type-file-file" onClick="GetUploadify(1,'','weapp','qr_img_call_back')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        </span>
+                    </div>
+                    <input type="text" id="qr_remote" name="qr_remote" value="" placeholder="http://" class="input-txt" style="display: none;">
+                    &nbsp;
+                    <label><input type="checkbox" name="qr_is_remote" id="qr_is_remote" value="1" onClick="clickRemote(this, 'qr');">远程图片</label>
+                    <span class="err"></span>
+                    <p class="notic">建议尺寸 258 * 258 (像素) 的jpg或gif文件</p>
+                </dd>
+            </dl>
+            <!-- <dl class="row">
+                <dt class="tit">
+                    <label for="title"><em>*</em>微信号类型</label>
+                </dt>
+                <dd class="opt"> 
+                    <select name="type">
+                        <option value="">请选择</option>
+                        {volist name="wechat_type" id="vo"}
+                        <option value="{$key}">{$vo}</option>
+                        {/volist}
+                    </select>
+                    <span class="err"></span>
+                    <p class="notic"></p>
+                </dd>
+            </dl> -->
+<!--             <dl class="row">
+                <dt class="tit">
+                    <label>微信接入</label>
+                </dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="wait_access1" class="cb-enable selected">是</label>
+                        <label for="wait_access0" class="cb-disable ">否</label>
+                        <input id="wait_access1" name="wait_access" value="1" type="radio" checked="checked">
+                        <input id="wait_access0" name="wait_access" value="0" type="radio">
+                    </div>
+                    <p class="notic"></p>
+                </dd>
+            </dl> -->
+            <div class="bot">
+                <a href="JavaScript:void(0);" onclick="formSubmit();" class="ncap-btn-big ncap-btn-green" id="submitBtn">确认提交</a>
+                &nbsp;
+                <a href="{:weapp_url('Wechat/Wechat/index')}" class="ncap-btn-big ncap-btn-green" style="border: 1px solid #C9C9C9; background-color: #fff;color: #555;">返回列表</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        
+        $("#post_form").validate({
+            debug: false, //调试模式取消submit的默认提交功能   
+            focusInvalid: false, //当为false时，验证无效时，没有焦点响应  
+            onkeyup: false,   
+            submitHandler: function(form){   //表单提交句柄,为一回调函数，带一个参数：form 
+                layer_loading('正在处理');  
+                form.submit();   //提交表单   
+            },  
+            ignore:":button",   //不验证的元素
+            rules:{
+                wxname:{
+                    required:true
+                },
+                weixin:{
+                    required:true
+                },
+                appid:{
+                    required:true
+                },
+                appsecret:{
+                    required:true
+                },
+                type:{
+                    required:true
+                }
+            },
+            messages:{
+                wxname:{
+                    required:"请填写公众号名称"
+                },
+                weixin:{
+                    required:"请填写微信号"
+                },
+                appid:{
+                    required:"请填写appid"
+                },
+                appsecret:{
+                    required:"请填写AppSecret"
+                },
+                type:{
+                    required:"请选择类型"
+                }
+            }
+        });
+    });
+
+    // 判断输入框是否为空
+    function formSubmit(){
+        $('#post_form').submit();
+    }
+
+    function headerpic_img_call_back(fileurl_tmp)
+    {
+      $("#headerpic_local").val(fileurl_tmp);
+      $("#img_a_headerpic").attr('href', fileurl_tmp);
+      $("#img_i_headerpic").attr('onmouseover', "layer_tips=layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+
+    function qr_img_call_back(fileurl_tmp)
+    {
+      $("#qr_local").val(fileurl_tmp);
+      $("#img_a_qr").attr('href', fileurl_tmp);
+      $("#img_i_qr").attr('onmouseover', "layer_tips=layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+</script>
+<script type="text/javascript" src="__SKIN__/js/clipboard.min.js"></script>
+<script type="text/javascript">
+    function showtext(classname){
+        var clipboard1 = new Clipboard("."+classname);clipboard1.on("success", function(e) {layer.msg("复制成功");});clipboard1.on("error", function(e) {layer.msg("复制失败！请手动复制", {icon:2});}); 
+    }
+</script>
+{include file="footer.htm" /}

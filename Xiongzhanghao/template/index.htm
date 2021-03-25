@@ -1,0 +1,59 @@
+{include file="header.htm" /}
+<body style="background-color: #FFF; overflow: auto;">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    {include file="bar.htm" /}
+    <form class="form-horizontal" id="post_form" action="{:weapp_url('Xiongzhanghao/Xiongzhanghao/index')}" method="post">
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label for="sitemap_zzbaidutoken">接口调用地址</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="sitemap_zzbaidutoken" placeholder="这里不能为空！" value="{$row.sitemap_zzbaidutoken}" id="sitemap_zzbaidutoken" class="input-txt">
+                    <span class="err"></span>
+                    <p class="">这里填入 <a href="https://ziyuan.baidu.com" target="_blank" style="color: red;">百度搜索资源平台</a> 的接口调用地址或者准入密钥，才能达到快速收录。</p>
+                </dd>
+            </dl>
+            <!-- <dl class="row">
+                <dt class="tit" style="width: auto">
+                    <label><b>熊掌号配置 <font color="red">[即将合并入快速收录功能]</font></b></label>
+                </dt>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="appid">熊掌号appid</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="appid" placeholder="您的熊掌号唯一识别ID" value="{$row.appid}" id="appid" class="input-txt">
+                    <span class="err"></span>
+                    <p class="notic"></p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="token">熊掌号token</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="token" placeholder="您的熊掌号推送用的准入密钥" value="{$row.token}" id="token" class="input-txt">
+                    <span class="err"></span>
+                    <p class="notic"></p>
+                </dd>
+            </dl> -->
+            <div class="bot">
+                <a href="JavaScript:void(0);" onclick="checkForm();" class="ncap-btn-big ncap-btn-green" id="submitBtn">确认提交</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    // 判断输入框是否为空
+    function checkForm(){
+        layer_loading('正在处理');
+        $('#post_form').submit();
+    }
+    
+</script>
+{include file="footer.htm" /}

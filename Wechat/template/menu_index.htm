@@ -1,0 +1,361 @@
+{include file="header.htm" /}
+
+<body style="background-color: rgb(255, 255, 255); overflow: auto; cursor: default; -moz-user-select: inherit;">
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+  {include file="bar.htm" /}
+  <div class="flexigrid">
+    <div class="mDiv">
+      <div class="ftitle">
+        <h3>菜单列表</h3>
+        <h5></h5>
+      </div>
+      <div title="刷新数据" class="pReload"><i class="fa fa-refresh"></i></div>
+      <div class="fbutton">
+            <a href="{:weapp_url("Wechat/Wechat/index")}">
+                <div class="add">
+                    <span><i class="fa fa-list"></i>{$weappInfo['name']}列表</span>
+                </div>
+            </a>
+      </div>
+    </div>
+    <div class="hDiv">
+      <div class="hDivBox">
+        <table cellspacing="0" cellpadding="0" style="width: 100%">
+          <thead>
+            <tr>
+              <th class="sign" axis="col0">
+                <div style="text-align: center; width: 34px;"><i class="ico-check"></i></div>
+              </th>
+              <th align="left" abbr="order_sn" axis="col3" class="">
+                <div style="text-align: left; width: 350px;" class="">菜单名称</div>
+              </th>
+              <th align="left" abbr="article_time" axis="col6" class="">
+                <div style="text-align: left; width: 260px;" class="">菜单类型</div>
+              </th>
+              <th align="left" abbr="article_time" axis="col6" class="">
+                <div style="text-align: left; width: 360px;" class="">菜单URL</div>
+              </th>
+              <th abbr="article_show" axis="col5" class="w60">
+                  <div class="tc">排序</div>
+              </th>
+              <th style="width:100%" axis="col7">
+                <div></div>
+              </th>
+            </tr> 
+          </thead>
+        </table>
+      </div>
+    </div>
+    <div class="bDiv" style="height: auto;">
+      <div id="flexigrid" cellpadding="0" cellspacing="0" style="height: auto;">
+        <form action="" method="post" id="menuForm">
+          <table style="width: 100%">
+            <tbody id="tbody">
+              {volist name="p_lists" id="list"}
+              <tr data-id="{$list.id}" class="odd pmenu{$list.id} menu{$list.id}">
+                  <td class="sign" axis="col0">
+                    <div style="text-align: center; width: 34px;"><i class="ico-check" ></i></div>
+                  </td>
+                  <td align="left" abbr="username" axis="col3" class="">
+                    <div style="text-align: left; width: 320px;" class="">
+                    <input type="text" name="menu[{$list.id}][name]" value="{$list.name}" class="input-txt topmenu">
+                    <a class="btn green" onclick="addcmenu({$list.id});"><i class="fa fa-plus"></i>添加</a>
+                    <a class="btn red" onclick="delmenu('{:weapp_url('Wechat/Menu/menu_del', array('id'=>$list.id))}', {$list.id}, false);"><i class="fa fa-trash-o"></i>删除</a>
+                    </div>
+                  </td>
+                  <td align="left" abbr="article_time" axis="col6" class="">
+                      <div style="text-align: left; width: 260px;" class="opt">
+                        <select name="menu[{$list.id}][type]" class="form-control">
+                            <option {if condition="$list['type'] eq 'view'"}selected{/if} value="view">URL链接</option>
+                            <option {if condition="$list['type'] eq 'click'"}selected{/if} value="click">触发关键字</option>
+                            <option {if condition="$list['type'] eq 'scancode_push'"}selected{/if} value="scancode_push">扫码(推事件)</option>
+                            <option {if condition="$list['type'] eq 'scancode_waitmsg'"}selected{/if} value="scancode_waitmsg"> 扫码(等待信息)</option>
+                            <option {if condition="$list['type'] eq 'pic_sysphoto'"}selected{/if} value="pic_sysphoto">系统拍照发图</option>
+                            <option {if condition="$list['type'] eq 'pic_photo_or_album'"}selected{/if} value="pic_photo_or_album">拍照或者相册发图</option>
+                            <option {if condition="$list['type'] eq 'pic_weixin'"}selected{/if} value="pic_weixin">微信相册发图</option>
+                            <option {if condition="$list['type'] eq 'location_select'"}selected{/if} value="location_select">地理位置</option>
+                        </select> 
+                      </div>
+                    </td>
+                    <td align="left" abbr="article_time" axis="col6" class="">
+                         <div style="text-align: left; width: 360px;" class=""><input type="text" value="{$list.value}" style="width:300px" name="menu[{$list.id}][value]" class="input-txt"></div>
+                    </td> 
+                    <td class="sort">
+                        <div class="w60 tc">
+                            <input style="text-align: left;" type="text" name="menu[{$list.id}][sort_order]" onkeyup="this.value=this.value.replace(/[^\d]/g,'');" onpaste="this.value=this.value.replace(/[^\d]/g,'');" size="4" value="{$list.sort_order}" />
+                        </div>
+                    </td>
+                   <td align="" class="" style="width: 100%;">
+                      <div>&nbsp;</div>
+                    </td>
+                    <input style="width: 100%" name="menu[{$list.id}][pid]" type="hidden" value="0">
+                </tr>
+                 <!--父级操作-->
+                 {volist name="c_lists" id="clist"}
+                      {if condition="$clist['pid'] eq $list['id']"}
+                      <tr class="odd pmenu{$list.id} menu{$clist.id}">
+                          <td class="sign" axis="col0">
+                            <div style="text-align: center; width: 34px;"><i class="fa fa-arrow-circle-right star-gray"></i></div>
+                          </td>
+                          <td align="left" abbr="username" axis="col3" class="" {if condition="$clist['pid'] gt 0"}style="padding-left: 2em;"{/if}>
+                            <div style="text-align: left; width: 320px;" class="">
+                            <input type="text" name="menu[{$clist.id}][name]" value="{$clist.name}" class="input-txt"> 
+                            <a class="btn red" onclick="delmenu('{:weapp_url('Wechat/Menu/menu_del', array('id'=>$clist.id))}', {$clist.id} , false);"><i class="fa fa-trash-o"></i>删除</a>
+                            </div>
+                          </td>
+                          <td align="left" abbr="article_time" axis="col6" class="">
+                              <div style="text-align: left; width: 260px;" class="opt">
+                                <select name="menu[{$clist.id}][type]" class="form-control">
+                                    <option {if condition="$clist['type'] eq 'view'"}selected{/if} value="view">URL链接</option>
+                                    <option {if condition="$clist['type'] eq 'click'"}selected{/if} value="click">触发关键字</option>
+                                    <option {if condition="$clist['type'] eq 'scancode_push'"}selected{/if} value="scancode_push">扫码(推事件)</option>
+                                    <option {if condition="$clist['type'] eq 'scancode_waitmsg'"}selected{/if} value="scancode_waitmsg">扫码(等待信息)</option>
+                                    <option {if condition="$clist['type'] eq 'pic_sysphoto'"}selected{/if} value="pic_sysphoto">系统拍照发图</option>
+                                    <option {if condition="$clist['type'] eq 'pic_photo_or_album'"}selected{/if} value="pic_photo_or_album">拍照或者相册发图</option>
+                                    <option {if condition="$clist['type'] eq 'pic_weixin'"}selected{/if} value="pic_weixin">微信相册发图</option>
+                                    <option {if condition="$clist['type'] eq 'location_select'"}selected{/if} value="location_select">地理位置</option>
+                                </select>
+                              </div>
+                            </td>
+                            <td align="left" abbr="article_time" axis="col6" class="">
+                                 <div style="text-align: left; width: 360px;" class=""><input type="text" value="{$clist.value}" name="menu[{$clist.id}][value]" style="width:300px"   class="input-txt"></div>
+                            </td> 
+                            <td class="sort">
+                                <div class="w60 tc">
+                                    <input style="text-align: left;" type="text" name="menu[{$clist.id}][sort_order]" onkeyup="this.value=this.value.replace(/[^\d]/g,'');" onpaste="this.value=this.value.replace(/[^\d]/g,'');" size="4"  value="{$clist.sort_order}" />
+                                </div>
+                            </td>
+                            <td align="" class="" style="width: 100%;">
+                              <div>&nbsp;</div>
+                            </td>
+                            <input style="width: 100%" name="menu[{$clist.id}][pid]" type="hidden" value="{$clist.pid}">
+                      </tr>
+                      {/if}
+                 {/volist}
+                {/volist}
+            </tbody>
+          </table>
+          <div class="sDiv" style="float:left;margin-top:10px">
+            <input type="hidden" name="submit_type" id="submit_type" value="0">
+          </div>
+        </form>
+      </div>
+      <div class="iDiv" style="display: none;"></div>
+    </div>
+    <!--分页位置--> 
+    <div class="tDiv">
+      <div class="tDiv2">
+        <div class="fbutton">
+            <a href="javascript:void(0);" onclick="addpmenu();">
+                <div class="add" title="添加一级菜单">
+                    <span><i class="fa fa-plus"></i>添加一级菜单</span>
+                </div>
+            </a>
+        </div>
+        <div class="fbutton">
+            <a href="javascript:void(0);" onclick="formSubmit(0);">
+                <div class="add" title="保存">
+                    <span><i class="fa fa-save"></i>保存</span>
+                </div>
+            </a>
+        </div>
+        <div class="fbutton">
+            <a href="javascript:void(0);" onclick="formSubmit(1);">
+                <div class="add" title="保存并发布">
+                    <span><i class="fa fa-send"></i>保存并发布</span>
+                </div>
+            </a>
+        </div>
+      </div>
+      <div style="clear:both;"></div>
+    </div>  
+  </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        //点击刷新数据
+        $('.fa-refresh').click(function(){
+            location.href = location.href;
+        });
+     
+        $('.ico-check ' , '.hDivBox').click(function(){
+            $('tr' ,'.hDivBox').toggleClass('trSelected' , function(index,currentclass){
+                var hasClass = $(this).hasClass('trSelected');
+                $('tr' , '#flexigrid').each(function(){
+                    if(hasClass){
+                        $(this).addClass('trSelected');
+                    }else{
+                        $(this).removeClass('trSelected');
+                    }
+                });  
+            });
+        });
+    });
+ 
+    var i  = {$max_id};
+    //添加菜单
+    function addpmenu(){
+        var pmenu = $('#tbody .topmenu');
+        if(pmenu.length >= 3){
+            layer.alert('最多三个一级菜单', {icon: 2}); 
+            return;
+        }
+        i++;
+        var id = i;
+        var tpl = $("#parent_menu_tpl").html();
+        tpl = tpl.replace(/__id__/g,id).replace('<table>','').replace('</table>','').replace('<tbody>','').replace('</tbody>','');
+        $('#tbody').append(tpl);
+    }
+
+    function addcmenu(pid){
+        var cmenu = $('#tbody .pmenu'+pid);
+        if(cmenu.length >= 6){
+            layer.alert('一级菜单下最多5个二级菜单', {icon: 2});  //alert('一级菜单下最多5个二级菜单');
+            return;
+        }
+        i++;
+        var id = i;
+        var tpl = $("#children_menu_tpl").html();
+        tpl = tpl.replace(/__id__/g,id);
+        tpl = tpl.replace(/__pid__/g,pid);
+        tpl = tpl.replace('<table>','').replace('</table>','').replace('<tbody>','').replace('</tbody>','');
+        $(cmenu.last()).after(tpl);
+    }
+
+    function delmenu(url, id , isNewAdd){
+        layer.confirm("确定删除吗？", function(){
+            if(isNewAdd){
+                //删除子分类
+                $('.pmenu'+id).remove();
+                $('.menu'+id).remove();
+                layer.closeAll();
+                layer.msg('删除成功',{icon:1});
+            }else{
+                $.ajax({
+                    url: url,
+                    type:'get',
+                    success:function(data){
+                        layer.closeAll();
+                        if(data=='success'){
+                            //删除子分类
+                            $('.pmenu'+id).remove();
+                            $('.menu'+id).remove();
+                            layer.msg('删除成功',{icon:1});
+                        }else{
+                            layer.msg('删除失败',{icon:2});
+                        }
+                    }
+                });
+            }
+        });
+    }
+  
+    function formSubmit(type){
+        var isFill = true;
+        var len = $("#menuForm input").length;
+        if(len <= 1){
+            layer.msg('请添加菜单!',{icon:2});
+            return;
+        }
+        
+        $("#menuForm input").each(function(){
+                if($(this).val() == ""){
+                    isFill = false;
+                    return false;
+                }     
+         }); 
+         
+         if(!isFill){
+             layer.msg('请将数据填充完整!',{icon:2});
+             return;
+         }
+         
+         $('#submit_type').val(type);
+
+         layer_loading('正在处理');
+
+         $("#menuForm").submit();
+    }
+     
+</script>
+ 
+<div id="children_menu_tpl" style="display:none">
+    <table>
+        <tbody>
+            <tr class="odd  pmenu__pid__  menu__id__">
+                    <td class="sign" axis="col0">
+                      <div style="text-align: center; width: 34px;"><i class="fa fa-arrow-circle-right star-gray"></i></div>
+                    </td>
+                    <td align="left" abbr="username" axis="col3" class="" style="padding-left: 2em;">
+                      <div style="text-align: left; width: 320px;" class="">
+                      <input type="text" name="menu[__id__][name]" value="" class="input-txt"> 
+                      <a class="btn red" onclick="delmenu('{:weapp_url('Wechat/Menu/menu_del', array('id'=>'__id__'))}', __id__ , true);"><i class="fa fa-trash-o"></i>删除</a>
+                      </div>
+                    </td>
+                    <td align="left" abbr="article_time" axis="col6" class="">
+                       <div style="text-align: left; width: 260px;" class="opt">
+                        <select name="menu[__id__][type]" class="form-control">
+                            <option value="view">URL链接</option>
+                            <option value="click">触发关键字</option>
+                            <option value="scancode_push">扫码（推事件）</option>
+                            <option value="scancode_waitmsg"> 扫码（等待信息）</option>
+                            <option value="pic_sysphoto">系统拍照发图</option>
+                            <option value="pic_photo_or_album">拍照或者相册发图</option>
+                            <option value="pic_weixin">微信相册发图</option>
+                            <option value="location_select">地理位置</option>
+                        </select>
+                    </div>
+                  </td>
+                  <td align="left" abbr="article_time" axis="col6" class="">
+                       <div style="text-align: left; width: 360px;" class=""><input type="text" value="#" name="menu[__id__][value]" style="width:300px" class="input-txt"></div>
+                  </td> 
+                  <td align="" class="" style="width: 100%;">
+                    <div>&nbsp;</div>
+                  </td>
+                  <input style="width: 100%" name="menu[__id__][pid]" type="hidden" value="__pid__">
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div id="parent_menu_tpl" style="display:none">
+    <table>
+        <tbody>
+            <tr class="odd  pmenu__id__ menu__id__">
+                <td class="sign" axis="col0">
+                  <div style="text-align: center; width: 34px;"><i class="ico-check" ></i></div>
+                </td>
+                <td align="left" abbr="username" axis="col3" class="">
+                  <div style="text-align: left; width: 320px;" class="">
+                  <input type="text" name="menu[__id__][name]" value="" class="input-txt topmenu">
+                  <a class="btn green" onclick="addcmenu(__id__);"><i class="fa fa-plus"></i>添加</a>
+                  <a class="btn red" onclick="delmenu('{:weapp_url('Wechat/Menu/menu_del', array('id'=>'__id__'))}', __id__ , true);"><i class="fa fa-trash-o"></i>删除</a>
+                  </div>
+                </td>
+                <td align="left" abbr="article_time" axis="col6" class="">
+                       <div style="text-align: left; width: 260px;" class="opt">
+                        <select name="menu[__id__][type]" class="form-control">
+                            <option value="view">链接</option>
+                            <option value="click">触发关键字</option>
+                            <option value="scancode_push">扫码（推事件）</option>
+                            <option value="scancode_waitmsg"> 扫码（等待信息）</option>
+                            <option value="pic_sysphoto">系统拍照发图</option>
+                            <option value="pic_photo_or_album">拍照或者相册发图</option>
+                            <option value="pic_weixin">微信相册发图</option>
+                            <option value="location_select">地理位置</option>
+                        </select> 
+                    </div>
+                  </td>
+                  <td align="left" abbr="article_time" axis="col6" class="">
+                       <div style="text-align: left; width: 360px;" class=""><input type="text" value="" style="width:300px" name="menu[__id__][value]" class="input-txt"></div>
+                  </td> 
+                 <td align="" class="" style="width: 100%;">
+                    <div>&nbsp;</div>
+                  </td>
+                  <input style="width: 100%" name="menu[__id__][pid]" type="hidden" value="0">
+            </tr>
+        </tbody>
+    </table>
+</div>
+{include file="footer.htm" /}

@@ -1,0 +1,32 @@
+
+<div class="sDiv2 addartbtn fl" style="margin-right: 6px;">
+    <input type="button" class="btn jianro {if condition="1 == preg_match('/^keyword_/', $Request.param.sa)"}current{/if}" value="全部关键字" onClick="window.location.href='{if condition="1 == preg_match('/^keyword_/', $Request.param.sa)"}javascript:void(0);{else /}{:weapp_url("Wechat/Keyword/keyword_index", array('token'=>$Request.param.token))}{/if}';">
+</div>
+
+<div class="sDiv2 addartbtn fl">
+    <input type="button" class="btn jianro {if condition="1 == preg_match('/^text_/', $Request.param.sa)"}current{/if}" value="文本" onClick="window.location.href='{if condition="1 == preg_match('/^text_/', $Request.param.sa)"}javascript:void(0);{else /}{:weapp_url("Wechat/Keyword/text_index", array('token'=>$Request.param.token))}{/if}';">
+</div>
+<div class="sDiv2 addartbtn probtn">
+    <input type="button" class="btn jianro" value="新增" onClick="window.location.href='{:weapp_url("Wechat/Keyword/text_add", array("token"=>$Request.param.token))}';">
+</div>
+
+<div class="sDiv2 addartbtn fl">
+    <input type="button" class="btn jianro {if condition="1 == preg_match('/^pic_/', $Request.param.sa)"}current{/if}" value="图片" onClick="window.location.href='{if condition="1 == preg_match('/^pic_/', $Request.param.sa)"}javascript:void(0);{else /}{:weapp_url("Wechat/Keyword/pic_index", array('token'=>$Request.param.token))}{/if}';">
+</div>
+<div class="sDiv2 addartbtn probtn">
+    <input type="button" class="btn jianro" value="新增" onClick="window.location.href='{:weapp_url("Wechat/Keyword/pic_add", array("token"=>$Request.param.token))}';">
+</div>
+
+<div class="sDiv2 addartbtn fl">
+    <input type="button" class="btn jianro {if condition="1 == preg_match('/^img_/', $Request.param.sa)"}current{/if}" value="单图文" onClick="window.location.href='{if condition="1 == preg_match('/^img_/', $Request.param.sa)"}javascript:void(0);{else /}{:weapp_url("Wechat/Keyword/img_index", array('token'=>$Request.param.token))}{/if}';">
+</div>
+<div class="sDiv2 addartbtn probtn">
+    <input type="button" class="btn jianro" value="新增" onClick="window.location.href='{:weapp_url("Wechat/Keyword/img_add", array("token"=>$Request.param.token))}';">
+</div>
+
+<div class="sDiv2 addartbtn fl">
+    <input type="button" class="btn jianro {if condition="1 == preg_match('/^news_/', $Request.param.sa)"}current{/if}" value="组合图文" onClick="window.location.href='{if condition="1 == preg_match('/^news_/', $Request.param.sa)"}javascript:void(0);{else /}{:weapp_url("Wechat/Keyword/news_index", array('token'=>$Request.param.token))}{/if}';">
+</div>
+<div class="sDiv2 addartbtn probtn">
+    <input type="button" class="btn jianro" value="新增" onClick="window.location.href='{:weapp_url("Wechat/Keyword/news_add", array("token"=>$Request.param.token))}';">
+</div>

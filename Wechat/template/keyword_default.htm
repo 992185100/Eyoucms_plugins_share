@@ -1,0 +1,51 @@
+{include file="header.htm" /}
+
+<body style="background-color: #FFF; overflow: auto;">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page ksedit">
+    <div class="fixed-bar">
+        <div class="item-title"><a class="back" href="javascript:history.back();" title="返回列表"><i class="fa fa-chevron-left"></i></a>
+            <div class="subject">
+                <h3>快捷入口</h3>
+                <h5></h5>
+            </div>
+        </div>
+    </div>
+    <form class="form-horizontal" id="post_form" action="{:weapp_url('Wechat/Keyword/keyword_index')}" method="get">
+        {$searchform.hidden|default=''}
+        <!-- 常规信息 -->
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label for="title"><em>*</em>跳转至</label>
+                </dt>
+                <dd class="opt">
+                    <select name="token" id="token">
+                        {volist name="wechat_list" id="vo"}
+                        <option value="{$vo.token}">{$vo.wxname}</option>
+                        {/volist}
+                    </select>
+                    <span class="err"></span>
+                    <p class="notic"></p>
+                </dd>
+            </dl>
+        </div>
+        <!-- 常规信息 -->
+        <div class="ncap-form-default">
+            <div class="bot">
+                <a href="JavaScript:void(0);" onclick="check_submit();" class="ncap-btn-big ncap-btn-green" id="submitBtn">确认提交</a>
+            </div>
+        </div> 
+    </form>
+</div>
+<script type="text/javascript">
+    // 判断输入框是否为空
+    function check_submit(){
+        layer_loading('正在处理');
+        $('#post_form').submit();
+    }
+</script>
+
+{include file="footer.htm" /}

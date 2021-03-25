@@ -1,0 +1,177 @@
+{include file="header.htm" /}
+<body style="background-color: rgb(255, 255, 255); overflow: auto; cursor: default; -moz-user-select: inherit;">
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page ad">
+    {include file="bar.htm" /}
+    <div class="flexigrid">
+        <div class="mDiv">
+            <div class="ftitle">
+                <h3>单图文回复列表</h3>
+                <h5>(共{$pageObj->totalRows}条记录)</h5>
+            </div>
+            <div title="刷新数据" class="pReload"><i class="fa fa-refresh"></i></div>
+            <form class="navbar-form form-inline" action="{:weapp_url('Wechat/Keyword/img_index')}" method="get" onsubmit="layer_loading('正在处理');">
+                {$searchform.hidden|default=''}
+                <div class="sDiv">
+                    {include file="keyword_btn.htm" /}
+                    <div class="sDiv2">
+                        <input type="hidden" name="token" value="{$Request.param.token}">
+                        <input type="text" size="30" name="keywords" value="{$Request.param.keywords}" class="qsbox" placeholder="关键字搜索...">
+                        <input type="submit" class="btn" value="搜索">
+                        <i class="fa fa-search"></i>
+                    </div>
+                    <div class="sDiv2">
+                        <input type="button" class="btn jianro" value="重置" onClick="window.location.href='{:weapp_url('Wechat/Keyword/img_index', array('token'=>$Request.param.token))}';">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="hDiv">
+            <div class="hDivBox">
+                <table cellspacing="0" cellpadding="0" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th class="sign w40" axis="col0">
+                            <div class="tc">选择</div>
+                        </th>
+                        <th abbr="article_title" axis="col3" class="w200">
+                            <div class="tc">关键字</div>
+                        </th>
+                        <th abbr="article_title" axis="col3" class="w200">
+                            <div class="tc">公众号名称</div>
+                        </th>
+                        <th abbr="article_title" axis="col3" class="">
+                            <div class="">标题</div>
+                        </th>
+                        <th abbr="article_title" axis="col3" class="w80">
+                            <div class="tc">描述</div>
+                        </th>
+                        <th abbr="article_title" axis="col3" class="w80">
+                            <div class="tc">封面图</div>
+                        </th>
+<!--                         <th abbr="article_time" axis="col6" class="w160">
+                            <div class="tc">更新时间</div>
+                        </th> -->
+                        <th axis="col1" class="w120">
+                            <div class="tc">操作</div>
+                        </th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="bDiv" style="height: auto;">
+            <div id="flexigrid" cellpadding="0" cellspacing="0" border="0">
+                <table style="width: 100%;">
+                    <tbody>
+                    {empty name="list"}
+                        <tr>
+                            <td class="no-data" align="center" axis="col0" colspan="50">
+                                <i class="fa fa-exclamation-circle"></i>没有符合条件的记录
+                            </td>
+                        </tr>
+                    {else/}
+                        {foreach name="list" item="vo" key="k" }
+                        <tr>
+                            <td class="sign">
+                                <div class="w40 tc"><input type="checkbox" name="ids[]" value="{$vo.id}"></div>
+                            </td>
+                            <td class="">
+                                <div class="w200 tc">{$vo.keyword}</div>
+                            </td>
+                            <td class="">
+                                <div class="w200 tc">{$wechat_list[$vo['token']]['wxname']}</div>
+                            </td>
+                            <td style="width: 100%;">
+                                <div class="">{$vo.title}</div>
+                            </td>
+                            <td class="">
+                                <div class="w80 tc">
+                                    <textarea rows="5" cols="80" name="intro_{$vo.id}" class="none">{$vo.intro}</textarea>
+                                    <a class="btn green" class="btn" href="javascript:void(0);" onclick="eyeintro(this);"><i class="fa fa-eye"></i>查看</a>
+                                </div>
+                            </td>
+                            <td class="">
+                                <div class="w80 tc"><a class="btn green" class="btn" href="javascript:preview('{$vo.litpic}');"><i class="fa fa-youtube-play"></i>预览</a></div>
+                            </td>
+<!--                             <td class="">
+                                <div class="w160 tc">
+                                    {$vo.update_time|MyDate='Y-m-d H:i:s',###}
+                                </div>
+                            </td> -->
+                            <td>
+                                <div class="w120 tc">
+                                    <a href="{:weapp_url('Wechat/Keyword/img_edit',array('token'=>$vo['token'],'id'=>$vo['id']))}" class="btn blue"><i class="fa fa-pencil-square-o"></i>编辑</a>
+                                    <a class="btn red"  href="javascript:void(0);" data-url="{:weapp_url('Wechat/Keyword/img_del')}" data-id="{$vo.id}" onClick="delfun(this);"><i class="fa fa-trash-o"></i>删除</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {/foreach}
+                    {/empty}
+                    </tbody>
+                </table>
+            </div>
+            <div class="iDiv" style="display: none;"></div>
+        </div>
+        <div class="tDiv">
+            <div class="tDiv2">
+                <div class="fbutton checkboxall">
+                    <input type="checkbox" onclick="javascript:$('input[name*=ids]').prop('checked',this.checked);">
+                </div>
+                <div class="fbutton">
+                    <a onclick="batch_del(this, 'ids');" data-url="{:weapp_url('Wechat/Keyword/img_del')}">
+                        <div class="add" title="批量删除">
+                            <span><i class="fa fa-close"></i>批量删除</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="fbutton">
+                    <a href="{:weapp_url('Wechat/Keyword/img_add', array('token'=>$Request.param.token))}">
+                        <div class="add" title="新增关键字">
+                            <span><i class="fa fa-plus"></i>新增关键字</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <!--分页位置-->
+        {$pageStr}
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        // 表格行点击选中切换
+        $('#flexigrid > table>tbody >tr').click(function(){
+            $(this).toggleClass('trSelected');
+        });
+
+        // 点击刷新数据
+        $('.fa-refresh').click(function(){
+            location.href = location.href;
+        });
+    });
+
+    function preview(url){
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: true,
+            area: ['300px','auto'],
+            skin: 'layui-layer-nobg', //没有背景色
+            shadeClose: false,
+            content: "<img src='"+url+"' width='300' height='300'>"
+        });
+    }
+
+    function eyeintro(obj) {
+        var intro = $(obj).parent().find('textarea[name^=intro_]').val();
+        layer.alert(intro, {
+            title: '摘要'
+        });
+    }
+</script>
+
+{include file="footer.htm" /}

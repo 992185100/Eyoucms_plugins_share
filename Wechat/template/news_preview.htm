@@ -1,0 +1,23 @@
+
+<link href="__WEAPP_TEMPLATE__/skin/css/news_preview.css" rel="stylesheet" type="text/css">
+<link href="__WEAPP_TEMPLATE__/skin/css/all-skins.css" rel="stylesheet" type="text/css">
+
+<!-- small box -->
+<div class="small-box bg-aqua" style="margin-bottom:0px; border: solid 1px saddlebrown;word-break: break-all;">
+    <div class="inner" style="text-align: center">
+        <img src="{$first.litpic|default=''|get_default_pic=###,true}" id="first-img" width="300" height="150" alt="">
+    </div>
+    <div class="icon">
+        <i class="ion ion-bag"></i>
+    </div>
+    <a class="small-box-footer" id="first-text" href="#">{$first.title|default=''}</a>
+    {volist name="list" id="vo"}
+        <div class="inner" style="height: 50px;border-top:solid 1px saddlebrown;">
+            <div style="float: right;">
+                <img width="50" height="50" alt="" src="{$vo.litpic|default=''|get_default_pic=###,true}">
+            </div>
+            <p style="text-align: left;">{$vo.title|default=''}</p>
+        </div>
+    {/volist}
+</div>
+
