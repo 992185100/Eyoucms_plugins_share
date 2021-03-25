@@ -1,0 +1,18 @@
+
+    <div class="fixed-bar">
+        <div class="item-title"><a class="back" href="{if condition="'Systemdoctor' == $Request.param.sc && 'index' == $Request.param.sa"}{:url("Weapp/index")}{else /}{:weapp_url("Systemdoctor/Systemdoctor/index")}{/if}" title="返回列表"><i class="fa fa-chevron-left"></i></a>
+            <div class="subject">
+                <h3>{$weappInfo['name']}</h3>
+                <h5></h5>
+            </div>
+            <ul class="tab-base nc-row">
+                <li>
+                {eq name="$Request.param.sa" value="index"}
+                    <a href="javascript:void(0);" class="tab current"><span>易优系统助手</span></a>
+                {else /}
+                    <a href="{:weapp_url("Systemdoctor/Systemdoctor/index")}" class="tab"><span>易优系统助手</span></a>
+                {/eq}
+                </li>
+            </ul>
+        </div>
+    </div>

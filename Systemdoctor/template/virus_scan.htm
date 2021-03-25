@@ -1,0 +1,126 @@
+{include file="header.htm" /}
+<body class="bodystyle" style="cursor: default; -moz-user-select: inherit; min-width:400px;">
+<div class="page" style="min-width: 400px;">
+    <div style="border: 1px solid rgb(204, 204, 204);padding: 10px;margin: 10px 20px;">
+        <p style="color: #0C0C0C;font-size: 14px;"><strong>安全建议:</strong></p>
+        <p>1、本检测程以开发模式为标准，如果您的网站目录包含其它系统，此检测程序可能会产生错误判断；</p>
+    </div>
+    <form class="form-horizontal" id="post_form" action="{:weapp_url('Systemdoctor/Systemdoctor/virus_scan')}" method="post">
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label for="type">文件类型</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="type" value="php|inc" id="type" class="input-txt">
+                    <span class="err"></span>
+                    <p class="notic">要检查的文件类型</p>
+                    多种文件类型请用"|"符号隔开
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="info">代码特征</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="info" value="eval|cmd|system|exec|_GET|_POST" id="info" class="input-txt">
+                    <span class="err"></span>
+                    <p class="notic">特征代码</p>
+                    多种代码特征请用"|"符号隔开
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="info">&nbsp;</label>
+                </dt>
+                <dd class="opt">
+                    <a href="JavaScript:void(0);" onclick="check_submit()" class="ncap-btn-big ncap-btn-green" id="submitBtn">开始检测</a>
+                    <a href="JavaScript:void(0);" onclick="delete_file()" class="ncap-btn-big ncap-btn-green" >清空缓存</a>
+                </dd>
+            </dl>
+        </div>
+    </form>
+    <div>
+        <p style="padding-bottom: 10px;"><strong style="font-size: 14px;color: forestgreen;">检测结果：</strong>(结果仅供参考，请务必查看源码后才删除非法文件)</p>
+        {notempty name="list"}
+            {volist name="list" id="vo"}
+            <div style="display: flex;justify-content:space-between;padding: 3px 0;border-bottom: 1px dotted #B8E6A2;font-size: 12px;width: 50%;">
+                <div >可疑文件：{$vo|substr=1}</div>
+                <div >
+                    {eq name="$Think.const.CONTROLLER_NAME.'@del'|is_check_access" value="1"}
+                    <a class="btn red" style="font-size: 12px;padding: 0;" href="javascript:void(0);" data-filename="{$vo}" onClick="delete_file(this);"><i class="fa fa-trash-o"></i>删除</a>
+                    {/eq}
+                </div>
+            </div>
+            {/volist}
+        {/notempty}
+    </div>
+
+</div>
+<script type="text/javascript">
+
+    // 判断输入框是否为空
+    function check_submit(){
+        if($.trim($('input[name=type]').val()) == ''){
+            showErrorMsg('文件类型不能为空！');
+            $('input[name=type]').focus();
+            return false;
+        }
+        layer_loading('正在处理');
+        $('#post_form').submit();
+    }
+
+    function choose_table() {
+        var table = $('#table option:selected').val();
+        if (!table){
+            layer.msg('没有指定表名', {icon: 5, title:false});
+            return false;
+        }
+        layer_loading('正在处理');
+        $.ajax({
+            url: "{:weapp_url('Systemdoctor/Systemdoctor/sql_details')}",
+            data: {table:table,_ajax:1},
+            type: 'post',
+            dataType: 'json',
+            success: function (res) {
+                layer.closeAll();
+                if ('1' == res.code) {
+                    $("#return_info").html(res.data);
+                } else {
+                    layer.msg(res.msg);
+                }
+            }
+        });
+    }
+
+    // 删除
+    function delete_file(obj){
+        layer.confirm('此操作不可恢复，确认彻底删除？', {
+            title: false,
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            layer_loading('正在处理');
+            // 确定
+            $.ajax({
+                type : 'post',
+                url : "{:weapp_url('Systemdoctor/Systemdoctor/delete_file')}",
+                data : {filename:$(obj).attr('data-filename'), _ajax:1},
+                dataType : 'json',
+                success : function(data){
+                    layer.closeAll();
+                    if(data.code == 1){
+                        layer.msg(data.msg, {icon: 1,time:1500});
+                        setTimeout("window.location.reload()", 1500 )
+                        // window.location.reload();
+                    }else{
+                        layer.alert(data.msg, {icon: 2 ,time:1500,title:false});
+                    }
+                }
+            })
+        }, function(index){
+            layer.close(index);
+        });
+        return false;
+    }
+</script>
+{include file="footer.htm" /}
