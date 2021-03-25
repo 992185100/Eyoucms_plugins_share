@@ -1,0 +1,36 @@
+<div class="am-form-group">
+    <label class="am-u-sm-3 am-form-label am-text-xs">标题栏 </label>
+    <div class="am-u-sm-8 am-u-end">
+        <label class="am-radio-inline">
+            <input type="radio" value="show"
+                   v-model="curItem.params.titleConf.showhide"> 显示
+        </label>
+        <label class="am-radio-inline">
+            <input type="radio" value="hide"
+                   v-model="curItem.params.titleConf.showhide"> 隐藏
+        </label>
+    </div>
+</div>
+
+<!-- 文档/商品组专用 -->
+<div v-show="curItem.params.titleConf.showhide == 'show'">
+    <div class="am-form-group">
+        <label class="am-u-sm-3 am-form-label am-text-xs"> 标题栏名称 </label>
+        <div class="am-u-sm-8 am-u-end">
+            <input class="tpl-form-input" type="text"
+                   v-model="curItem.params.titleConf.text">
+        </div>
+    </div>
+    <div class="am-form-group" v-show="curItem.params.source == 'choice'">
+        <label class="am-u-sm-3 am-form-label am-text-xs"> 标题栏链接 </label>
+        <div class="am-u-sm-8 am-u-end">
+            <select @change="onEditoSelectCatgory($event, 'text')" v-model="curItem.params.titleConf.typeid"
+                    data-am-selected="{btnSize: 'sm',  placeholder:'全部分类', maxHeight: 400}">
+                <option value="0"> -- 不显示 --</option>
+                {$allCatgory}
+            </select>
+        </div>
+    </div>
+</div>
+<!--分割线-->
+<hr data-am-widget="divider" style="" class="am-divider am-divider-dashed"/>

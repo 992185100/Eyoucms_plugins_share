@@ -1,0 +1,63 @@
+<div class="am-form-group">
+    <label class="am-u-sm-3 am-form-label am-text-xs">标题栏 </label>
+    <div class="am-u-sm-8 am-u-end">
+        <label class="am-radio-inline">
+            <input type="radio" value="show"
+                   v-model="curItem.params.titleConf.showhide"> 显示
+        </label>
+        <label class="am-radio-inline">
+            <input type="radio" value="hide"
+                   v-model="curItem.params.titleConf.showhide"> 隐藏
+        </label>
+    </div>
+</div>
+
+<!-- 默认通用 -->
+<div v-show="curItem.params.titleConf.showhide == 'show'">
+    <div class="am-form-group">
+        <label class="am-u-sm-3 am-form-label am-text-xs"> 标题栏名称 </label>
+        <div class="am-u-sm-8 am-u-end">
+            <input class="tpl-form-input" type="text"
+                   v-model="curItem.params.titleConf.text">
+        </div>
+    </div>
+    <div class="am-form-group">
+        <label class="am-u-sm-3 am-form-label am-text-xs"> 标题栏链接 </label>
+        <div class="am-u-sm-8 am-u-end">
+            <select @change="onEditoSelectPathIndex(curItem.params.titleConf, opts.page_links)" v-model="curItem.params.titleConf.pathconf.index">
+                <template v-for="(sitem, sindex) in opts.page_links">
+                    <option :value="sindex" > {{ sindex!='default'?sitem.name:'--不显示--' }}</option>
+                </template>
+            </select>
+            <input v-if="curItem.params.titleConf.pathconf.index == 'article_view'" type="number" min="1" v-model="curItem.params.titleConf.pathconf.value" :placeholder="opts.page_links[curItem.params.titleConf.pathconf.index].placeholder" @keyup="onEditoJoinPathValue(curItem.params.titleConf, opts.page_links)" @click="onEditoJoinPathValue(curItem.params.titleConf, opts.page_links)">
+            <!-- 自定义DIY页面列表 -->
+            <select @change="onEditoJoinPathValue(curItem.params.titleConf, opts.page_links)" v-if="curItem.params.titleConf.pathconf.index == 'custom_index'"  v-model="curItem.params.titleConf.pathconf.value"
+                    data-am-selected="{btnSize: 'sm',  placeholder:'选择页面', maxHeight: 400}">
+                <option value=""> -- 选择页面 --</option>
+                {$customPageCatgory}
+            </select>
+            <!-- 可以发布的列表模型分类 -->
+            <select @change="onEditoJoinPathValue(curItem.params.titleConf, opts.page_links)" v-if="curItem.params.titleConf.pathconf.index == 'article_list'"  v-model="curItem.params.titleConf.pathconf.value"
+                    data-am-selected="{btnSize: 'sm',  placeholder:'选择分类', maxHeight: 400}">
+                <option value=""> -- 选择分类 --</option>
+                {$archivesCatgory}
+            </select>
+            <!-- 单页模型分类 -->
+            <select @change="onEditoJoinPathValue(curItem.params.titleConf, opts.page_links)" v-if="curItem.params.titleConf.pathconf.index == 'article_single'"  v-model="curItem.params.titleConf.pathconf.value"
+                    data-am-selected="{btnSize: 'sm',  placeholder:'选择分类', maxHeight: 400}">
+                <option value=""> -- 选择分类 --</option>
+                {$singleCatgory}
+            </select>
+            <!-- 留言模型分类 -->
+            <select @change="onEditoJoinPathValue(curItem.params.titleConf, opts.page_links)" v-if="curItem.params.titleConf.pathconf.index == 'guestbook_index'"  v-model="curItem.params.titleConf.pathconf.value"
+                    data-am-selected="{btnSize: 'sm',  placeholder:'选择分类', maxHeight: 400}">
+                <option value=""> -- 选择分类 --</option>
+                {$gbookCatgory}
+            </select>
+            <input type="hidden" v-model="curItem.params.titleConf.pathconf.is_vars" :value="curItem.params.titleConf.pathconf.is_vars">
+            <input type="hidden" v-model="curItem.params.titleConf.url" :value="curItem.params.titleConf.url">
+        </div>
+    </div>
+</div>
+<!--分割线-->
+<hr data-am-widget="divider" style="" class="am-divider am-divider-dashed"/>

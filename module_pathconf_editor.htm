@@ -1,0 +1,42 @@
+<label class="am-u-sm-3 am-form-label am-text-xs"> {{!objItem.urltext ? '链接' : objItem.urltext}}</label>
+<div class="am-u-sm-9 am-u-end">
+    <select @change="onEditoSelectPathIndex(objItem)" v-model="objItem.pathconf.index">
+        <template v-for="(sitem, sindex) in opts.page_links">
+            <option :value="sindex"> {{ sitem.name }}</option>
+        </template>
+    </select>
+    <div v-if="objItem.pathconf.index == 'article_view'">
+        <div v-show="objItem.pathconf.title != ''" style="margin-top: 5px;">
+            {{objItem.pathconf.title}}
+            <input type="number" v-model="objItem.pathconf.value" :placeholder="opts.page_links.article_view.placeholder" style="display: none;">
+        </div>
+        <button type="button" class="btn-resetColor am-btn am-btn-xs"
+                @click.stop="onEditoJoinPathValue3(objItem, '选择文档')" style="margin: 10px 0px;">
+            选择
+        </button>
+    </div>
+    <!-- 自定义DIY页面列表 -->
+    <select @change="onEditoJoinPathValue(objItem)" v-if="objItem.pathconf.index == 'custom_index'"  v-model="objItem.pathconf.value">
+        <option value=""> -- 选择页面 --</option>
+        <template v-for="(sitem, sindex) in opts.custom_page_list">
+            <option :value="sitem.page_id"> {{ sitem.page_name }}</option>
+        </template>
+    </select>
+    <!-- 可以发布的列表模型分类 -->
+    <select @change="onEditoJoinPathValue(objItem)" v-if="objItem.pathconf.index == 'article_list'"  v-model="objItem.pathconf.value">
+        <option value=""> -- 选择分类 --</option>
+        {$archivesCatgory}
+    </select>
+    <!-- 单页模型分类 -->
+    <select @change="onEditoJoinPathValue(objItem)" v-if="objItem.pathconf.index == 'article_single'"  v-model="objItem.pathconf.value">
+        <option value=""> -- 选择分类 --</option>
+        {$singleCatgory}
+    </select>
+    <!-- 留言模型分类 -->
+    <select @change="onEditoJoinPathValue(objItem)" v-if="objItem.pathconf.index == 'guestbook_index'"  v-model="objItem.pathconf.value">
+        <option value=""> -- 选择分类 --</option>
+        {$gbookCatgory}
+    </select>
+    <input type="hidden" v-model="objItem.pathconf.is_vars" :value="objItem.pathconf.is_vars">
+    <input type="hidden" v-model="objItem.url" :value="objItem.url">
+</div>

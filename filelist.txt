@@ -1,0 +1,15 @@
+application/plugins/controller/DiyminiproMall.php
+application/plugins/controller/DiyminiproMallBase.php
+application/plugins/controller/DiyminiproMallUsers.php
+application/plugins/model/DiyminiproMall.php
+application/plugins/model/DiyminiproMallBase.php
+application/plugins/model/DiyminiproMallCategory.php
+application/plugins/model/DiyminiproMallPage.php
+application/plugins/model/DiyminiproMallShop.php
+application/plugins/model/DiyminiproMallUser.php
+application/plugins/model/DiyminiproMallUserBase.php
+data/schema/ey_weapp_diyminipro_mall.php
+data/schema/ey_weapp_diyminipro_mall_page.php
+data/schema/ey_weapp_diyminipro_mall_setting.php
+data/schema/ey_weapp_diyminipro_mall_users.php
+weapp/DiyminiproMall

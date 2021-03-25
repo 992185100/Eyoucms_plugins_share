@@ -1,0 +1,87 @@
+{include file="header" /}
+<link rel="stylesheet" href="__WEAPP_TEMPLATE__/diyminipro/css/app.css?v={$weappInfo.version|default='v1.0.0'}"/>
+<link rel="stylesheet" href="__WEAPP_TEMPLATE__/diyminipro/css/amazeui.min2.css?v={$weappInfo.version|default='v1.0.0'}"/>
+<link rel="stylesheet" href="__WEAPP_TEMPLATE__/diyminipro/css/font.css?v={$weappInfo.version|default='v1.0.0'}">
+
+<body class="bodystyle" style="cursor: default; -moz-user-select: inherit; padding: 0;background-color:#fff;">
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page" style="box-shadow: unset;margin: 0 auto; width: 1170px;padding:20px 0;overflow: initial;">
+    <div class="wx-tempalte">
+<!--        <div class="wx-tempalte-tit">
+            <div class="wx-tempalte-titleLeft">
+               <h3>更换模板</h3>
+            </div>
+        </div> -->
+        <div class="wx-tempalte-nav">
+            <ul>
+                {volist name="$categorylist" id="vo"}
+                <li><a {if condition="$categoryid == $vo.id"} class="active" {/if} href="{:weapp_url('DiyminiproMall/DiyminiproMall/theme_cloud', ['categoryid'=>$vo.id])}">{$vo.name}</a></li>
+                {/volist}
+                <li><a {empty name="$categoryid"} class="active" {/empty} href="{:weapp_url('DiyminiproMall/DiyminiproMall/theme_cloud')}">全部 ({$alltotal|default='0'})</a></li>
+            </ul>
+        </div>
+        <div class="wx-tempalte-list">
+            {foreach name="list" item="vo" key="k" }
+            <div class="wx-template_wrap">
+                <div class="wx-tempalte-item">
+                    <img src="{$vo.litpic}" class="preview_img" title="{$vo.name}" alt="{$vo.name}">
+                </div>
+                <div class="code_layer">
+                    <div class="template_btn use_btn" data-mini_id="{$vo.mini_id}" onclick="useTheme(this);">更换模板</div>
+                </div>
+            </div>
+            {/foreach}
+        </div>
+        <!--分页位置-->
+        {$page}
+    </div>
+</div>
+
+<script>
+
+    var parentObj = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+
+    function useTheme(obj)
+    {
+        var msg = "更换模板后，原有数据将不保留。确定更换该模板吗？";
+        var confirm = parent.layer.confirm(msg, {
+                title: false
+                ,icon: 6
+                ,btn: ['确定','取消'] //按钮
+
+            }, function(){
+                parent.layer.close(confirm);
+                layer_loading('正在处理');
+                var use_mini_id = $(obj).data('mini_id');
+                $.ajax({
+                    type: 'POST',
+                    url: "{:weapp_url('DiyminiproMall/DiyminiproMall/ajax_use_theme')}",
+                    data: {use_mini_id:use_mini_id,_ajax:1},
+                    dataType: 'json',
+                    success: function(res){
+                        layer.closeAll();
+                        if (res.code == 1) {
+                            var _parent = parent;
+                            _parent.layer.close(parentObj);
+                            _parent.layer.msg(res.msg, {shade: 0.3, time: 1000}, function(){
+                                _parent.gourl(res.url);
+                            });
+                        } else {
+                            layer.msg(res.msg, {icon: 2, time: 1500});  
+                        }
+                    },
+                    error:function(){
+                        layer.closeAll();
+                        layer.alert(ey_unknown_error, {icon: 2, title:false});
+                    }
+                }); 
+            }, function(){
+                parent.layer.close(confirm);
+                return false;
+            }
+        );
+    }
+
+</script>
+{include file="footer" /}

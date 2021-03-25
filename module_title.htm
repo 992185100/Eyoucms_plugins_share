@@ -1,0 +1,110 @@
+<!--标题风格1-->
+<div class="diy-title-style" v-show="item.params.titleConf.showhide == 'show'" v-if="diyStyleData.titleModel.style == 1">
+    <!-- 自动模式的导航标题 -->
+    <div class="diy-title-box" v-if="item.params.source == 'auto'">
+        <div class="diy-title-leftline"></div>
+        <div class="diy-title-txt" :style="{color:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].color, fontSize:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].size+'px'}">{{item.params.titleConf.text}}</div>
+        <div class="diy-title-rightline"></div>
+    </div>
+    <!-- 手动模式的导航标题 -->
+    <div class="diy-title-box" v-else>
+        <div class="diy-title-leftline"></div>
+        <div class="diy-title-txt" :style="{color:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].color, fontSize:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].size+'px'}">{{item.params.titleConf.text}}</div>
+        <div class="diy-title-rightline"></div>
+    </div>
+</div>
+<!--标题风格2-->
+<div class="diy-title-style" v-show="item.params.titleConf.showhide == 'show'" v-else-if="diyStyleData.titleModel.style == 2">
+    <div class="diy-title-tag" :style="{background:diyStyleData.titleModel.linesbackground}"></div>
+    <!-- 自动模式的导航标题 -->
+    <div class="diy-title-box" v-if="item.params.source == 'auto'">
+        <div class="diy-title-txt" :style="{color:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].color, fontSize:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].size+'px'}">{{item.params.titleConf.text}}</div>
+        <div class="diy-title-more"><span class="diy-more-icon"></span></div>
+    </div>
+    <!-- 手动模式的导航标题 -->
+    <div class="diy-title-box" v-else>
+        <div class="diy-title-txt" :style="{color:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].color, fontSize:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].size+'px'}">{{item.params.titleConf.text}}</div>
+        <div class="diy-title-more" v-show="item.params.titleConf.url != ''"><span class="diy-more-icon"></span></div>
+    </div>
+</div>
+<!--标题风格3-->
+<div class="diy-title-style" v-show="item.params.titleConf.showhide == 'show'" v-else-if="diyStyleData.titleModel.style == 3">
+    <!-- 自动模式的导航标题 -->
+    <div class="diy-title-box" v-if="item.params.source == 'auto'">
+        <div class="diy-title-txt" :style="{color:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].color, fontSize:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].size+'px'}">{{item.params.titleConf.text}}</div>
+        <div class="diy-title-more">更多</div>
+    </div>
+    <!-- 手动模式的导航标题 -->
+    <div class="diy-title-box" v-else>
+        <div class="diy-title-txt" :style="{color:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].color, fontSize:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].size+'px'}">{{item.params.titleConf.text}}</div>
+        <div class="diy-title-more" v-show="item.params.titleConf.url != ''">更多</div>
+    </div>
+</div>
+<!--标题风格4-->
+<div class="diy-title-style" v-show="item.params.titleConf.showhide == 'show'" v-else-if="diyStyleData.titleModel.style == 4">
+    <!-- 自动模式的导航标题 -->
+    <div class="diy-title-box" v-if="item.params.source == 'auto'">
+        <div class="diy-title-txt" :style="{color:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].color, fontSize:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].size+'px'}">{{item.params.titleConf.text}}</div>
+        <div class="diy-title-line" :style="{background:diyStyleData.titleModel.linesbackground}"></div>
+    </div>
+    <!-- 手动模式的导航标题 -->
+    <div class="diy-title-box" v-else>
+        <div class="diy-title-txt" :style="{color:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].color, fontSize:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].size+'px'}">{{item.params.titleConf.text}}</div>
+        <div class="diy-title-line" :style="{background:diyStyleData.titleModel.linesbackground}"></div>
+    </div>
+</div>
+<!--标题风格5-->
+<div class="diy-title-style" v-show="item.params.titleConf.showhide == 'show'" v-else-if="diyStyleData.titleModel.style == 5">
+    <!-- 自动模式的导航标题 -->
+    <div class="diy-title-box" v-if="item.params.source == 'auto'">
+        <div class="diy-title-txt" :style="{background:diyStyleData.titleModel.linesbackground,color:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].color, fontSize:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].size+'px'}">{{item.params.titleConf.text}}</div>
+        <div class="diy-title-more">更多<span class="diy-more-icon"></span></div>
+    </div>
+    <!-- 手动模式的导航标题 -->
+    <div class="diy-title-box" v-else>
+        <div class="diy-title-txt" :style="{background:diyStyleData.titleModel.linesbackground,color:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].color, fontSize:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].size+'px'}">{{item.params.titleConf.text}}</div>
+        <div class="diy-title-more" v-show="item.params.titleConf.url != ''">更多<span class="diy-more-icon"></span></div>
+    </div>
+</div>
+<!--标题风格6-->
+<div class="diy-title-style" v-show="item.params.titleConf.showhide == 'show'" v-else-if="diyStyleData.titleModel.style == 6">
+    <!-- 自动模式的导航标题 -->
+    <div class="diy-title-box" v-if="item.params.source == 'auto'">
+        <div class="diy-title-txt" :style="{color:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].color, fontSize:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].size+'px'}">{{item.params.titleConf.text}}</div>
+        <div class="diy-title-more" :style="{color:diyStyleData.titleModel.linesbackground}">More<span class="diy-more-icon" ></span></div>
+    </div>
+    <!-- 手动模式的导航标题 -->
+    <div class="diy-title-box" v-else>
+        <div class="diy-title-txt" :style="{color:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].color, fontSize:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].size+'px'}">{{item.params.titleConf.text}}</div>
+        <div class="diy-title-more" v-show="item.params.titleConf.url != ''" :style="{color:diyStyleData.titleModel.linesbackground}">More<span class="diy-more-icon"></span></div>
+    </div>
+</div>
+<!--标题风格7-->
+<div class="diy-title-style" v-show="item.params.titleConf.showhide == 'show'" v-else-if="diyStyleData.titleModel.style == 7">
+    <div class="diy-title-tag" :style="{background:diyStyleData.titleModel.linesbackground}"></div>
+    <!-- 自动模式的导航标题 -->
+    <div class="diy-title-box" v-if="item.params.source == 'auto'">
+        <div class="diy-title-txt" :style="{color:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].color, fontSize:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].size+'px'}">{{item.params.titleConf.text}}</div>
+        <div class="diy-title-more">更多<span class="diy-more-icon"></span></div>
+    </div>
+    <!-- 手动模式的导航标题 -->
+    <div class="diy-title-box" v-else>
+        <div class="diy-title-txt" :style="{color:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].color, fontSize:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].size+'px'}">{{item.params.titleConf.text}}</div>
+        <div class="diy-title-more" v-show="item.params.titleConf.url != ''">更多<span class="diy-more-icon"></span></div>
+    </div>
+</div>
+<!--标题默认风格-->
+<div class="diy-title-style" v-show="item.params.titleConf.showhide == 'show'" v-else>
+    <!-- 自动模式的导航标题 -->
+    <div class="diy-title-box" v-if="item.params.source == 'auto'">
+        <div class="diy-title-leftline"></div>
+        <div class="diy-title-txt" :style="{color:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].color, fontSize:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].size+'px'}">{{item.params.titleConf.text}}</div>
+        <div class="diy-title-rightline"></div>
+    </div>
+    <!-- 手动模式的导航标题 -->
+    <div class="diy-title-box" v-else>
+        <div class="diy-title-leftline"></div>
+        <div class="diy-title-txt" :style="{color:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].color, fontSize:diyStyleData.titleModel.text[diyStyleData.titleModel.text.source].size+'px'}">{{item.params.titleConf.text}}</div>
+        <div class="diy-title-rightline"></div>
+    </div>
+</div>
